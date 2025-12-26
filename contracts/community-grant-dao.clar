@@ -47,6 +47,17 @@
   (is-some (map-get? votes {proposal-id: proposal-id, voter: voter}))
 )
 
+(define-public (deposit (amount uint))
+  (begin
+    (asserts! (> amount u0) ERR_INSUFFICIENT_AMOUNT)
+    (stx-transfer? amount tx-sender (as-contract tx-sender))
+  )
+)
+
+(define-read-only (get-treasury-balance)
+  (stx-get-balance (as-contract tx-sender))
+)
+
 (define-private (get-vote-weight (voter principal))
   u1
 )
