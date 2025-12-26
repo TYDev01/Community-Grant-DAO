@@ -32,6 +32,10 @@
   {supported: bool}
 )
 
+(define-private (get-proposal (proposal-id uint))
+  (map-get? proposals {id: proposal-id})
+)
+
 (define-public (create-proposal
   (title (string-ascii 64))
   (recipient principal)
@@ -59,6 +63,31 @@
         }
       )
       (ok next-id)
+    )
+  )
+)
+
+(define-public (vote (proposal-id uint) (support bool))
+  (let ((proposal (get-proposal proposal-id)))
+    (match proposal current
+      (begin
+        (asserts! (>= block-height (get start-block current)) ERR_VOTING_CLOSED)
+        (asserts! (<= block-height (get end-block current)) ERR_VOTING_CLOSED)
+        (asserts! (is-none (map-get? votes {proposal-id: proposal-id, voter: tx-sender})) ERR_ALREADY_VOTED)
+        (map-set votes {proposal-id: proposal-id, voter: tx-sender} {supported: support})
+        (if support
+          (map-set proposals
+            {id: proposal-id}
+            (merge current {yes-votes: (+ (get yes-votes current) u1)})
+          )
+          (map-set proposals
+            {id: proposal-id}
+            (merge current {no-votes: (+ (get no-votes current) u1)})
+          )
+        )
+        (ok true)
+      )
+      ERR_NOT_FOUND
     )
   )
 )
