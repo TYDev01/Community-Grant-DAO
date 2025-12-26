@@ -119,6 +119,15 @@
   MAX_TITLE_LEN
 )
 
+(define-read-only (get-proposal-votes (proposal-id uint))
+  (let ((proposal (get-proposal proposal-id)))
+    (match proposal current
+      (ok {yes: (get yes-votes current), no: (get no-votes current)})
+      ERR_NOT_FOUND
+    )
+  )
+)
+
 
 (define-public (create-proposal
   (title (string-ascii 64))
