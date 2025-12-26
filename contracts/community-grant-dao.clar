@@ -91,3 +91,27 @@
     )
   )
 )
+
+(define-public (execute (proposal-id uint))
+  (let ((proposal (get-proposal proposal-id)))
+    (match proposal current
+      (begin
+        (asserts! (> block-height (get end-block current)) ERR_NOT_ENDED)
+        (asserts! (not (get executed current)) ERR_ALREADY_EXECUTED)
+        (asserts! (> (get yes-votes current) (get no-votes current)) ERR_NOT_PASSED)
+        (let ((transfer (as-contract (stx-transfer? (get amount current) tx-sender (get recipient current)))))
+          (match transfer
+            ok-result
+            (begin
+              (map-set proposals {id: proposal-id} (merge current {executed: true}))
+              (ok ok-result)
+            )
+            err-code
+            (err err-code)
+          )
+        )
+      )
+      ERR_NOT_FOUND
+    )
+  )
+)
