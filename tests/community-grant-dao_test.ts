@@ -231,3 +231,31 @@ Clarinet.test({
     proposal["yes-votes"].expectUint(3);
   },
 });
+
+Clarinet.test({
+  name: "only owner can update governance token",
+  async fn(chain: Chain, accounts: Map<string, Account>) {
+    const deployer = accounts.get("deployer")!;
+    const other = accounts.get("wallet_2")!;
+
+    const setOwner = chain.mineBlock([
+      Tx.contractCall(
+        CONTRACT,
+        "set-governance-token",
+        [types.principal(mockTokenPrincipal(deployer))],
+        deployer.address
+      ),
+    ]);
+    setOwner.receipts[0].result.expectOk().expectBool(true);
+
+    const blocked = chain.mineBlock([
+      Tx.contractCall(
+        CONTRACT,
+        "set-governance-token",
+        [types.principal(mockTokenPrincipal(other))],
+        other.address
+      ),
+    ]);
+    blocked.receipts[0].result.expectErr().expectUint(110);
+  },
+});
