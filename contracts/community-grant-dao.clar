@@ -87,6 +87,26 @@
   )
 )
 
+(define-read-only (get-proposal-status (proposal-id uint))
+  (let ((proposal (get-proposal proposal-id)))
+    (match proposal current
+      (if (get executed current)
+        (ok u3)
+        (if (> block-height (get end-block current))
+          (if (> (get yes-votes current) (get no-votes current))
+            (ok u2)
+            (ok u1)
+          )
+          (if (>= block-height (get start-block current))
+            (ok u0)
+            (ok u4)
+          )
+        )
+      )
+      ERR_NOT_FOUND
+    )
+  )
+)
 (define-private (get-vote-weight (voter principal))
   u1
 )
