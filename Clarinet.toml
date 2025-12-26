@@ -1,14 +1,20 @@
 [project]
-name = 'community_dao'
-description = ''
-authors = []
-telemetry = true
-cache_dir = './.cache'
+name = "community-grant-dao"
+description = "Community Grant DAO on Stacks"
+authors = ["tony"]
+telemetry = false
+cache_dir = "./.cache"
 requirements = []
-[contracts._]
-path = 'contracts/_.clar'
-clarity_version = 4
-epoch = 'latest'
+
+[contracts.community-grant-dao]
+path = "contracts/community-grant-dao.clar"
+clarity_version = 2
+epoch = "latest"
+
+[contracts.mock-sip010]
+path = "contracts/mock-sip010.clar"
+clarity_version = 2
+epoch = "latest"
 [repl.analysis]
 passes = [
     'call_checker',
