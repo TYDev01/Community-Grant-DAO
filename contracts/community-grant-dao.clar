@@ -128,6 +128,15 @@
   )
 )
 
+(define-read-only (get-proposal-window (proposal-id uint))
+  (let ((proposal (get-proposal proposal-id)))
+    (match proposal current
+      (ok {start: (get start-block current), end: (get end-block current)})
+      ERR_NOT_FOUND
+    )
+  )
+)
+
 
 (define-public (create-proposal
   (title (string-ascii 64))
