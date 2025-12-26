@@ -40,6 +40,14 @@
   (get-proposal proposal-id)
 )
 
+(define-read-only (get-proposal-count)
+  (var-get proposal-count)
+)
+
+(define-read-only (has-voted (proposal-id uint) (voter principal))
+  (is-some (map-get? votes {proposal-id: proposal-id, voter: voter}))
+)
+
 (define-public (create-proposal
   (title (string-ascii 64))
   (recipient principal)
