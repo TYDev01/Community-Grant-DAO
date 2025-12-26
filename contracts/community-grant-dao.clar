@@ -58,6 +58,10 @@
   (stx-get-balance (as-contract tx-sender))
 )
 
+(define-read-only (get-vote (proposal-id uint) (voter principal))
+  (map-get? votes {proposal-id: proposal-id, voter: voter})
+)
+
 (define-private (get-vote-weight (voter principal))
   u1
 )
