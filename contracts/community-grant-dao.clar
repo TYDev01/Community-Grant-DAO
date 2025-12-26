@@ -137,6 +137,20 @@
   )
 )
 
+(define-read-only (get-proposal-summary (proposal-id uint))
+  (let ((proposal (get-proposal proposal-id)))
+    (match proposal current
+      (ok {
+        title: (get title current),
+        recipient: (get recipient current),
+        amount: (get amount current),
+        executed: (get executed current)
+      })
+      ERR_NOT_FOUND
+    )
+  )
+)
+
 
 (define-public (create-proposal
   (title (string-ascii 64))
