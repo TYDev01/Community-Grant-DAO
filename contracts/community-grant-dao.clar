@@ -8,6 +8,7 @@
 (define-constant ERR_NOT_PASSED (err u107))
 (define-constant ERR_INSUFFICIENT_AMOUNT (err u108))
 (define-constant ERR_TOKEN_CALL (err u109))
+(define-constant ERR_NOT_OWNER (err u110))
 
 (define-constant MAX_TITLE_LEN u64)
 
@@ -18,6 +19,7 @@
 )
 
 (define-data-var proposal-count uint u0)
+(define-data-var contract-owner (optional principal) none)
 (define-data-var governance-token (optional principal) none)
 
 (define-map proposals
@@ -55,6 +57,14 @@
   (is-some (map-get? votes {proposal-id: proposal-id, voter: voter}))
 )
 
+(define-read-only (get-governance-token)
+  (var-get governance-token)
+)
+
+(define-read-only (get-owner)
+  (var-get contract-owner)
+)
+
 (define-private (get-vote-weight (voter principal))
   (match (var-get governance-token)
     token
@@ -63,6 +73,22 @@
         err-code ERR_TOKEN_CALL
       )
     (ok u1)
+  )
+)
+
+(define-public (set-governance-token (token principal))
+  (match (var-get contract-owner)
+    owner
+      (begin
+        (asserts! (is-eq owner tx-sender) ERR_NOT_OWNER)
+        (var-set governance-token (some token))
+        (ok true)
+      )
+    (begin
+      (var-set contract-owner (some tx-sender))
+      (var-set governance-token (some token))
+      (ok true)
+    )
   )
 )
 
