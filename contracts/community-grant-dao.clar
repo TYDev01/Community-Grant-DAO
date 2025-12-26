@@ -270,7 +270,9 @@
       (begin
         (asserts! (is-eq (get creator current) tx-sender) ERR_NOT_CREATOR)
         (asserts! (> amount u0) ERR_INSUFFICIENT_AMOUNT)
-        (as-contract (stx-transfer? amount tx-sender tx-sender))
+        (let ((recipient tx-sender))
+          (as-contract (stx-transfer? amount tx-sender recipient))
+        )
       )
       ERR_NOT_FOUND
     )
