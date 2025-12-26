@@ -263,3 +263,16 @@
     )
   )
 )
+
+(define-public (withdraw (proposal-id uint) (amount uint))
+  (let ((proposal (get-proposal proposal-id)))
+    (match proposal current
+      (begin
+        (asserts! (is-eq (get creator current) tx-sender) ERR_NOT_CREATOR)
+        (asserts! (> amount u0) ERR_INSUFFICIENT_AMOUNT)
+        (as-contract (stx-transfer? amount tx-sender tx-sender))
+      )
+      ERR_NOT_FOUND
+    )
+  )
+)
