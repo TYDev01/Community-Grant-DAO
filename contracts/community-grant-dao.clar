@@ -7,6 +7,9 @@
 (define-constant ERR_ALREADY_EXECUTED (err u106))
 (define-constant ERR_NOT_PASSED (err u107))
 (define-constant ERR_INSUFFICIENT_AMOUNT (err u108))
+(define-constant ERR_NOT_CREATOR (err u109))
+(define-constant ERR_ALREADY_CANCELED (err u110))
+(define-constant ERR_VOTING_STARTED (err u111))
 
 (define-constant MAX_TITLE_LEN u64)
 
@@ -16,13 +19,15 @@
   {id: uint}
   {
     title: (string-ascii 64),
+    creator: principal,
     recipient: principal,
     amount: uint,
     start-block: uint,
     end-block: uint,
     yes-votes: uint,
     no-votes: uint,
-    executed: bool
+    executed: bool,
+    canceled: bool
   }
 )
 
@@ -68,6 +73,7 @@
       (and
         (> block-height (get end-block current))
         (not (get executed current))
+        (not (get canceled current))
         (> (get yes-votes current) (get no-votes current))
       )
       false
@@ -79,6 +85,7 @@
   (let ((proposal (get-proposal proposal-id)))
     (match proposal current
       (and
+        (not (get canceled current))
         (>= block-height (get start-block current))
         (<= block-height (get end-block current))
       )
@@ -90,16 +97,19 @@
 (define-read-only (get-proposal-status (proposal-id uint))
   (let ((proposal (get-proposal proposal-id)))
     (match proposal current
-      (if (get executed current)
-        (ok u3)
-        (if (> block-height (get end-block current))
-          (if (> (get yes-votes current) (get no-votes current))
-            (ok u2)
-            (ok u1)
-          )
-          (if (>= block-height (get start-block current))
-            (ok u0)
-            (ok u4)
+      (if (get canceled current)
+        (ok u5)
+        (if (get executed current)
+          (ok u3)
+          (if (> block-height (get end-block current))
+            (if (> (get yes-votes current) (get no-votes current))
+              (ok u2)
+              (ok u1)
+            )
+            (if (>= block-height (get start-block current))
+              (ok u0)
+              (ok u4)
+            )
           )
         )
       )
@@ -142,9 +152,11 @@
     (match proposal current
       (ok {
         title: (get title current),
+        creator: (get creator current),
         recipient: (get recipient current),
         amount: (get amount current),
-        executed: (get executed current)
+        executed: (get executed current),
+        canceled: (get canceled current)
       })
       ERR_NOT_FOUND
     )
@@ -169,13 +181,15 @@
         {id: next-id}
         {
           title: title,
+          creator: tx-sender,
           recipient: recipient,
           amount: amount,
           start-block: start-block,
           end-block: end-block,
           yes-votes: u0,
           no-votes: u0,
-          executed: false
+          executed: false,
+          canceled: false
         }
       )
       (ok next-id)
@@ -216,6 +230,7 @@
       (begin
         (asserts! (> block-height (get end-block current)) ERR_NOT_ENDED)
         (asserts! (not (get executed current)) ERR_ALREADY_EXECUTED)
+        (asserts! (not (get canceled current)) ERR_ALREADY_CANCELED)
         (asserts! (> (get yes-votes current) (get no-votes current)) ERR_NOT_PASSED)
         (let ((transfer (as-contract (stx-transfer? (get amount current) tx-sender (get recipient current)))))
           (match transfer
@@ -228,6 +243,21 @@
             (err err-code)
           )
         )
+      )
+      ERR_NOT_FOUND
+    )
+  )
+)
+
+(define-public (cancel-proposal (proposal-id uint))
+  (let ((proposal (get-proposal proposal-id)))
+    (match proposal current
+      (begin
+        (asserts! (is-eq (get creator current) tx-sender) ERR_NOT_CREATOR)
+        (asserts! (not (get canceled current)) ERR_ALREADY_CANCELED)
+        (asserts! (< block-height (get start-block current)) ERR_VOTING_STARTED)
+        (map-set proposals {id: proposal-id} (merge current {canceled: true}))
+        (ok true)
       )
       ERR_NOT_FOUND
     )
