@@ -36,6 +36,10 @@
   (map-get? proposals {id: proposal-id})
 )
 
+(define-read-only (get-proposal-data (proposal-id uint))
+  (get-proposal proposal-id)
+)
+
 (define-public (create-proposal
   (title (string-ascii 64))
   (recipient principal)
