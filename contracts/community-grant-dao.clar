@@ -7,20 +7,10 @@
 (define-constant ERR_ALREADY_EXECUTED (err u106))
 (define-constant ERR_NOT_PASSED (err u107))
 (define-constant ERR_INSUFFICIENT_AMOUNT (err u108))
-(define-constant ERR_TOKEN_CALL (err u109))
-(define-constant ERR_NOT_OWNER (err u110))
 
 (define-constant MAX_TITLE_LEN u64)
 
-(define-trait sip-010
-  (
-    (get-balance (principal) (response uint uint))
-  )
-)
-
 (define-data-var proposal-count uint u0)
-(define-data-var contract-owner (optional principal) none)
-(define-data-var governance-token (optional principal) none)
 
 (define-map proposals
   {id: uint}
@@ -57,40 +47,10 @@
   (is-some (map-get? votes {proposal-id: proposal-id, voter: voter}))
 )
 
-(define-read-only (get-governance-token)
-  (var-get governance-token)
-)
-
-(define-read-only (get-owner)
-  (var-get contract-owner)
-)
-
 (define-private (get-vote-weight (voter principal))
-  (match (var-get governance-token)
-    token
-      (match (contract-call? token get-balance voter)
-        balance (ok balance)
-        err-code ERR_TOKEN_CALL
-      )
-    (ok u1)
-  )
+  u1
 )
 
-(define-public (set-governance-token (token principal))
-  (match (var-get contract-owner)
-    owner
-      (begin
-        (asserts! (is-eq owner tx-sender) ERR_NOT_OWNER)
-        (var-set governance-token (some token))
-        (ok true)
-      )
-    (begin
-      (var-set contract-owner (some tx-sender))
-      (var-set governance-token (some token))
-      (ok true)
-    )
-  )
-)
 
 (define-public (create-proposal
   (title (string-ascii 64))
@@ -130,24 +90,19 @@
         (asserts! (>= block-height (get start-block current)) ERR_VOTING_CLOSED)
         (asserts! (<= block-height (get end-block current)) ERR_VOTING_CLOSED)
         (asserts! (is-none (map-get? votes {proposal-id: proposal-id, voter: tx-sender})) ERR_ALREADY_VOTED)
-        (match (get-vote-weight tx-sender)
-          weight
-            (begin
-              (map-set votes {proposal-id: proposal-id, voter: tx-sender} {supported: support})
-              (if support
-                (map-set proposals
-                  {id: proposal-id}
-                  (merge current {yes-votes: (+ (get yes-votes current) weight)})
-                )
-                (map-set proposals
-                  {id: proposal-id}
-                  (merge current {no-votes: (+ (get no-votes current) weight)})
-                )
-              )
-              (ok true)
+        (let ((weight (get-vote-weight tx-sender)))
+          (map-set votes {proposal-id: proposal-id, voter: tx-sender} {supported: support})
+          (if support
+            (map-set proposals
+              {id: proposal-id}
+              (merge current {yes-votes: (+ (get yes-votes current) weight)})
             )
-          err-code
-            err-code
+            (map-set proposals
+              {id: proposal-id}
+              (merge current {no-votes: (+ (get no-votes current) weight)})
+            )
+          )
+          (ok true)
         )
       )
       ERR_NOT_FOUND
