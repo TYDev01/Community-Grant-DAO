@@ -62,6 +62,31 @@
   (map-get? votes {proposal-id: proposal-id, voter: voter})
 )
 
+(define-read-only (can-execute (proposal-id uint))
+  (let ((proposal (get-proposal proposal-id)))
+    (match proposal current
+      (and
+        (> block-height (get end-block current))
+        (not (get executed current))
+        (> (get yes-votes current) (get no-votes current))
+      )
+      false
+    )
+  )
+)
+
+(define-read-only (is-voting-open (proposal-id uint))
+  (let ((proposal (get-proposal proposal-id)))
+    (match proposal current
+      (and
+        (>= block-height (get start-block current))
+        (<= block-height (get end-block current))
+      )
+      false
+    )
+  )
+)
+
 (define-private (get-vote-weight (voter principal))
   u1
 )
