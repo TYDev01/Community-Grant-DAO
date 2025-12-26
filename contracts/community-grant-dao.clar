@@ -111,6 +111,14 @@
   u1
 )
 
+(define-read-only (get-vote-weight-readonly (voter principal))
+  (get-vote-weight voter)
+)
+
+(define-read-only (get-max-title-length)
+  MAX_TITLE_LEN
+)
+
 
 (define-public (create-proposal
   (title (string-ascii 64))
