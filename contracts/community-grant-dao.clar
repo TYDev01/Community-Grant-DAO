@@ -163,6 +163,15 @@
   )
 )
 
+(define-read-only (is-canceled (proposal-id uint))
+  (let ((proposal (get-proposal proposal-id)))
+    (match proposal current
+      (get canceled current)
+      false
+    )
+  )
+)
+
 
 (define-public (create-proposal
   (title (string-ascii 64))
