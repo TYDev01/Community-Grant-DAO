@@ -259,3 +259,53 @@ Clarinet.test({
     blocked.receipts[0].result.expectErr().expectUint(110);
   },
 });
+
+Clarinet.test({
+  name: "has-voted reflects voter state",
+  async fn(chain: Chain, accounts: Map<string, Account>) {
+    const deployer = accounts.get("deployer")!;
+    const voter = accounts.get("wallet_1")!;
+
+    const setup = chain.mineBlock([
+      Tx.contractCall(
+        CONTRACT,
+        "create-proposal",
+        [
+          types.ascii("Has voted"),
+          types.principal(voter.address),
+          types.uint(1000),
+          types.uint(1),
+          types.uint(10),
+        ],
+        deployer.address
+      ),
+    ]);
+    setup.receipts[0].result.expectOk().expectUint(1);
+
+    const before = chain.callReadOnlyFn(
+      CONTRACT,
+      "has-voted",
+      [types.uint(1), types.principal(voter.address)],
+      deployer.address
+    );
+    before.result.expectBool(false);
+
+    const vote = chain.mineBlock([
+      Tx.contractCall(
+        CONTRACT,
+        "vote",
+        [types.uint(1), types.bool(true)],
+        voter.address
+      ),
+    ]);
+    vote.receipts[0].result.expectOk().expectBool(true);
+
+    const after = chain.callReadOnlyFn(
+      CONTRACT,
+      "has-voted",
+      [types.uint(1), types.principal(voter.address)],
+      deployer.address
+    );
+    after.result.expectBool(true);
+  },
+});
