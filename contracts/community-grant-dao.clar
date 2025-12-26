@@ -7,8 +7,15 @@
 (define-constant ERR_ALREADY_EXECUTED (err u106))
 (define-constant ERR_NOT_PASSED (err u107))
 (define-constant ERR_INSUFFICIENT_AMOUNT (err u108))
+(define-constant ERR_TOKEN_CALL (err u109))
 
 (define-constant MAX_TITLE_LEN u64)
+
+(define-trait sip-010
+  (
+    (get-balance (principal) (response uint uint))
+  )
+)
 
 (define-data-var proposal-count uint u0)
 (define-data-var governance-token (optional principal) none)
@@ -46,6 +53,17 @@
 
 (define-read-only (has-voted (proposal-id uint) (voter principal))
   (is-some (map-get? votes {proposal-id: proposal-id, voter: voter}))
+)
+
+(define-private (get-vote-weight (voter principal))
+  (match (var-get governance-token)
+    token
+      (match (contract-call? token get-balance voter)
+        balance (ok balance)
+        err-code ERR_TOKEN_CALL
+      )
+    (ok u1)
+  )
 )
 
 (define-public (create-proposal
