@@ -104,18 +104,25 @@
         (asserts! (>= block-height (get start-block current)) ERR_VOTING_CLOSED)
         (asserts! (<= block-height (get end-block current)) ERR_VOTING_CLOSED)
         (asserts! (is-none (map-get? votes {proposal-id: proposal-id, voter: tx-sender})) ERR_ALREADY_VOTED)
-        (map-set votes {proposal-id: proposal-id, voter: tx-sender} {supported: support})
-        (if support
-          (map-set proposals
-            {id: proposal-id}
-            (merge current {yes-votes: (+ (get yes-votes current) u1)})
-          )
-          (map-set proposals
-            {id: proposal-id}
-            (merge current {no-votes: (+ (get no-votes current) u1)})
-          )
+        (match (get-vote-weight tx-sender)
+          weight
+            (begin
+              (map-set votes {proposal-id: proposal-id, voter: tx-sender} {supported: support})
+              (if support
+                (map-set proposals
+                  {id: proposal-id}
+                  (merge current {yes-votes: (+ (get yes-votes current) weight)})
+                )
+                (map-set proposals
+                  {id: proposal-id}
+                  (merge current {no-votes: (+ (get no-votes current) weight)})
+                )
+              )
+              (ok true)
+            )
+          err-code
+            err-code
         )
-        (ok true)
       )
       ERR_NOT_FOUND
     )
