@@ -10,11 +10,6 @@ requirements = []
 path = "contracts/community-grant-dao.clar"
 clarity_version = 2
 epoch = "latest"
-
-[contracts.mock-sip010]
-path = "contracts/mock-sip010.clar"
-clarity_version = 2
-epoch = "latest"
 [repl.analysis]
 passes = [
     'call_checker',

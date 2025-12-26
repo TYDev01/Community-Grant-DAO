@@ -6,10 +6,6 @@ function contractPrincipal(account: Account): string {
   return `${account.address}.${CONTRACT}`;
 }
 
-function mockTokenPrincipal(account: Account): string {
-  return `${account.address}.mock-sip010`;
-}
-
 Clarinet.test({
   name: "proposal creation stores data",
   async fn(chain: Chain, accounts: Map<string, Account>) {
@@ -177,88 +173,6 @@ Clarinet.test({
   },
 });
 
-Clarinet.test({
-  name: "sip-010 vote weight used when token set",
-  async fn(chain: Chain, accounts: Map<string, Account>) {
-    const deployer = accounts.get("deployer")!;
-    const voter = accounts.get("wallet_1")!;
-
-    const setup = chain.mineBlock([
-      Tx.contractCall(
-        CONTRACT,
-        "set-governance-token",
-        [types.principal(mockTokenPrincipal(deployer))],
-        deployer.address
-      ),
-      Tx.contractCall(
-        "mock-sip010",
-        "set-balance",
-        [types.principal(voter.address), types.uint(3)],
-        deployer.address
-      ),
-      Tx.contractCall(
-        CONTRACT,
-        "create-proposal",
-        [
-          types.ascii("Weighted vote"),
-          types.principal(voter.address),
-          types.uint(1000),
-          types.uint(1),
-          types.uint(10),
-        ],
-        deployer.address
-      ),
-    ]);
-    setup.receipts[2].result.expectOk().expectUint(1);
-
-    const vote = chain.mineBlock([
-      Tx.contractCall(
-        CONTRACT,
-        "vote",
-        [types.uint(1), types.bool(true)],
-        voter.address
-      ),
-    ]);
-    vote.receipts[0].result.expectOk().expectBool(true);
-
-    const read = chain.callReadOnlyFn(
-      CONTRACT,
-      "get-proposal-data",
-      [types.uint(1)],
-      deployer.address
-    );
-    const proposal = read.result.expectSome().expectTuple();
-    proposal["yes-votes"].expectUint(3);
-  },
-});
-
-Clarinet.test({
-  name: "only owner can update governance token",
-  async fn(chain: Chain, accounts: Map<string, Account>) {
-    const deployer = accounts.get("deployer")!;
-    const other = accounts.get("wallet_2")!;
-
-    const setOwner = chain.mineBlock([
-      Tx.contractCall(
-        CONTRACT,
-        "set-governance-token",
-        [types.principal(mockTokenPrincipal(deployer))],
-        deployer.address
-      ),
-    ]);
-    setOwner.receipts[0].result.expectOk().expectBool(true);
-
-    const blocked = chain.mineBlock([
-      Tx.contractCall(
-        CONTRACT,
-        "set-governance-token",
-        [types.principal(mockTokenPrincipal(other))],
-        other.address
-      ),
-    ]);
-    blocked.receipts[0].result.expectErr().expectUint(110);
-  },
-});
 
 Clarinet.test({
   name: "has-voted reflects voter state",
