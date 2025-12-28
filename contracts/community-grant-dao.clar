@@ -208,6 +208,7 @@
           canceled: false
         }
       )
+      (print {event: "proposal-created", id: next-id, creator: tx-sender, recipient: recipient, amount: amount, start: start-block, end: end-block})
       (ok next-id)
     )
   )
