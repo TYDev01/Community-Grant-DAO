@@ -210,6 +210,7 @@
   (let ((proposal (get-proposal proposal-id)))
     (match proposal current
       (begin
+        (asserts! (not (get canceled current)) ERR_ALREADY_CANCELED)
         (asserts! (>= block-height (get start-block current)) ERR_VOTING_CLOSED)
         (asserts! (<= block-height (get end-block current)) ERR_VOTING_CLOSED)
         (asserts! (is-none (map-get? votes {proposal-id: proposal-id, voter: tx-sender})) ERR_ALREADY_VOTED)
