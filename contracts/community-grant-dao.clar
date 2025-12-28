@@ -13,10 +13,13 @@
 (define-constant ERR_WINDOW_TOO_LONG (err u112))
 (define-constant ERR_WITHDRAW_DISABLED (err u113))
 (define-constant ERR_QUORUM_NOT_MET (err u114))
+(define-constant ERR_INVALID_RANGE (err u115))
+(define-constant ERR_RANGE_TOO_LARGE (err u116))
 
 (define-constant MAX_TITLE_LEN u64)
 (define-constant MAX_WINDOW_LEN u1440)
 (define-constant MIN_QUORUM u1)
+(define-constant MAX_RANGE_LEN u200)
 
 (define-trait sip-010-trait
   (
@@ -139,6 +142,14 @@
     pending: u4,
     canceled: u5
   })
+)
+
+(define-read-only (get-proposals-range (start uint) (end uint))
+  (begin
+    (asserts! (<= start end) ERR_INVALID_RANGE)
+    (asserts! (<= (+ (- end start) u1) MAX_RANGE_LEN) ERR_RANGE_TOO_LARGE)
+    (ok (map get-proposal (range start (+ end u1))))
+  )
 )
 (define-private (get-vote-weight (voter principal))
   (match (var-get governance-token) token-contract
