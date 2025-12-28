@@ -10,8 +10,10 @@
 (define-constant ERR_NOT_CREATOR (err u109))
 (define-constant ERR_ALREADY_CANCELED (err u110))
 (define-constant ERR_VOTING_STARTED (err u111))
+(define-constant ERR_WINDOW_TOO_LONG (err u112))
 
 (define-constant MAX_TITLE_LEN u64)
+(define-constant MAX_WINDOW_LEN u1440)
 
 (define-data-var proposal-count uint u0)
 
@@ -184,6 +186,8 @@
     (asserts! (<= (len title) MAX_TITLE_LEN) ERR_TITLE_TOO_LONG)
     (asserts! (> amount u0) ERR_INSUFFICIENT_AMOUNT)
     (asserts! (< start-block end-block) ERR_INVALID_WINDOW)
+    (asserts! (>= start-block block-height) ERR_INVALID_WINDOW)
+    (asserts! (<= (- end-block start-block) MAX_WINDOW_LEN) ERR_WINDOW_TOO_LONG)
     (let ((next-id (+ (var-get proposal-count) u1)))
       (var-set proposal-count next-id)
       (map-set proposals
