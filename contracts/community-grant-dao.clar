@@ -12,9 +12,11 @@
 (define-constant ERR_VOTING_STARTED (err u111))
 (define-constant ERR_WINDOW_TOO_LONG (err u112))
 (define-constant ERR_WITHDRAW_DISABLED (err u113))
+(define-constant ERR_QUORUM_NOT_MET (err u114))
 
 (define-constant MAX_TITLE_LEN u64)
 (define-constant MAX_WINDOW_LEN u1440)
+(define-constant MIN_QUORUM u1)
 
 (define-data-var proposal-count uint u0)
 
@@ -246,6 +248,7 @@
         (asserts! (> block-height (get end-block current)) ERR_NOT_ENDED)
         (asserts! (not (get executed current)) ERR_ALREADY_EXECUTED)
         (asserts! (not (get canceled current)) ERR_ALREADY_CANCELED)
+        (asserts! (>= (+ (get yes-votes current) (get no-votes current)) MIN_QUORUM) ERR_QUORUM_NOT_MET)
         (asserts! (> (get yes-votes current) (get no-votes current)) ERR_NOT_PASSED)
         (let ((transfer (as-contract (stx-transfer? (get amount current) tx-sender (get recipient current)))))
           (match transfer
