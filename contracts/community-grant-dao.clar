@@ -278,6 +278,7 @@
         (asserts! (not (get canceled current)) ERR_ALREADY_CANCELED)
         (asserts! (< block-height (get start-block current)) ERR_VOTING_STARTED)
         (map-set proposals {id: proposal-id} (merge current {canceled: true}))
+        (print {event: "proposal-canceled", id: proposal-id, canceller: tx-sender})
         (ok true)
       )
       ERR_NOT_FOUND
