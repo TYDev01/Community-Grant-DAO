@@ -11,6 +11,7 @@
 (define-constant ERR_ALREADY_CANCELED (err u110))
 (define-constant ERR_VOTING_STARTED (err u111))
 (define-constant ERR_WINDOW_TOO_LONG (err u112))
+(define-constant ERR_WITHDRAW_DISABLED (err u113))
 
 (define-constant MAX_TITLE_LEN u64)
 (define-constant MAX_WINDOW_LEN u1440)
@@ -279,16 +280,5 @@
 )
 
 (define-public (withdraw (proposal-id uint) (amount uint))
-  (let ((proposal (get-proposal proposal-id)))
-    (match proposal current
-      (begin
-        (asserts! (is-eq (get creator current) tx-sender) ERR_NOT_CREATOR)
-        (asserts! (> amount u0) ERR_INSUFFICIENT_AMOUNT)
-        (let ((recipient tx-sender))
-          (as-contract (stx-transfer? amount tx-sender recipient))
-        )
-      )
-      ERR_NOT_FOUND
-    )
-  )
+  (err ERR_WITHDRAW_DISABLED)
 )
