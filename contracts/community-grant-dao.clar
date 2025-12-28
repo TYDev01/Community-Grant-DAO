@@ -145,6 +145,26 @@
   (get-vote-weight voter)
 )
 
+(define-public (set-governance-token (token-contract principal))
+  (begin
+    (asserts! (is-eq tx-sender (as-contract tx-sender)) ERR_NOT_CREATOR)
+    (var-set governance-token (some token-contract))
+    (ok true)
+  )
+)
+
+(define-public (clear-governance-token)
+  (begin
+    (asserts! (is-eq tx-sender (as-contract tx-sender)) ERR_NOT_CREATOR)
+    (var-set governance-token none)
+    (ok true)
+  )
+)
+
+(define-read-only (get-governance-token)
+  (var-get governance-token)
+)
+
 (define-read-only (get-max-title-length)
   MAX_TITLE_LEN
 )
