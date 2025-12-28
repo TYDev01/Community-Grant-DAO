@@ -234,6 +234,7 @@
               (merge current {no-votes: (+ (get no-votes current) weight)})
             )
           )
+          (print {event: "vote-cast", id: proposal-id, voter: tx-sender, support: support, weight: weight})
           (ok true)
         )
       )
