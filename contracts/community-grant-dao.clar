@@ -18,7 +18,14 @@
 (define-constant MAX_WINDOW_LEN u1440)
 (define-constant MIN_QUORUM u1)
 
+(define-trait sip-010-trait
+  (
+    (get-balance (principal) (response uint uint))
+  )
+)
+
 (define-data-var proposal-count uint u0)
+(define-data-var governance-token (optional principal) none)
 
 (define-map proposals
   {id: uint}
@@ -123,7 +130,15 @@
   )
 )
 (define-private (get-vote-weight (voter principal))
-  u1
+  (match (var-get governance-token) token-contract
+    (let ((balance-result (contract-call? token-contract get-balance voter)))
+      (match balance-result balance
+        balance
+        err u0
+      )
+    )
+    u1
+  )
 )
 
 (define-read-only (get-vote-weight-readonly (voter principal))
