@@ -129,6 +129,17 @@
     )
   )
 )
+
+(define-read-only (get-proposal-status-codes)
+  (ok {
+    active: u0,
+    failed: u1,
+    passed: u2,
+    executed: u3,
+    pending: u4,
+    canceled: u5
+  })
+)
 (define-private (get-vote-weight (voter principal))
   (match (var-get governance-token) token-contract
     (let ((balance-result (contract-call? token-contract get-balance voter)))
