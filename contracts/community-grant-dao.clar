@@ -257,6 +257,7 @@
             ok-result
             (begin
               (map-set proposals {id: proposal-id} (merge current {executed: true}))
+              (print {event: "proposal-executed", id: proposal-id, recipient: (get recipient current), amount: (get amount current)})
               (ok ok-result)
             )
             err-code
