@@ -1415,6 +1415,40 @@ export default function Home() {
                   </button>
                 </div>
               </div>
+              <div className="mt-10 grid gap-4 lg:grid-cols-3">
+                {[
+                  {
+                    title: "Builders",
+                    detail: "Ship initiatives and report outcomes.",
+                    stat: "340 active",
+                  },
+                  {
+                    title: "Reviewers",
+                    detail: "Guide drafts before they hit voting.",
+                    stat: "48 curators",
+                  },
+                  {
+                    title: "Stewards",
+                    detail: "Protect treasury and unblock execution.",
+                    stat: "12 stewards",
+                  },
+                ].map((role) => (
+                  <div
+                    key={role.title}
+                    className="rounded-2xl border border-[#e6d9c8] bg-[#fdfaf5] px-5 py-4 text-sm text-[#6a5f55]"
+                  >
+                    <p className="text-xs uppercase tracking-[0.2em] text-[#8a7d71]">
+                      {role.title}
+                    </p>
+                    <p className="mt-2 text-base font-semibold text-[#1f1b16]">
+                      {role.detail}
+                    </p>
+                    <p className="mt-3 text-xs uppercase tracking-[0.2em] text-[#8a7d71]">
+                      {role.stat}
+                    </p>
+                  </div>
+                ))}
+              </div>
             </div>
           </section>
 
