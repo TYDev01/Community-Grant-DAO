@@ -118,6 +118,14 @@ export default function Home() {
               Launch App
             </button>
           </div>
+          <div className="mx-auto w-full max-w-6xl px-6 pb-4">
+            <div className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-[#e6d9c8] bg-white/70 px-4 py-3 text-xs uppercase tracking-[0.2em] text-[#6a5f55]">
+              <span>Next voting window opens in 6h</span>
+              <span className="rounded-full bg-[#f7d8a3] px-3 py-1 text-[10px] font-semibold text-[#5f3c06]">
+                Proposal queue: 9
+              </span>
+            </div>
+          </div>
         </header>
 
         <main className="relative z-10">
