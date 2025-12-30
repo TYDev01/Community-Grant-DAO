@@ -173,6 +173,44 @@ export default function Home() {
             </div>
           </section>
 
+          <section className="mx-auto w-full max-w-6xl px-6 pb-20">
+            <div className="grid gap-6 lg:grid-cols-3">
+              {[
+                {
+                  title: "Wallet status",
+                  value: "Connected",
+                  detail: "Last sync: 12s ago",
+                },
+                {
+                  title: "Voting power",
+                  value: "18,420",
+                  detail: "Token-weighted balance",
+                },
+                {
+                  title: "Pending actions",
+                  value: "2",
+                  detail: "Votes to cast today",
+                },
+              ].map((item) => (
+                <div
+                  key={item.title}
+                  className="rounded-3xl border border-[#e6d9c8] bg-white/80 p-6 shadow-[0_18px_45px_rgba(31,27,22,0.07)]"
+                >
+                  <p className="text-xs uppercase tracking-[0.3em] text-[#8a7d71]">
+                    {item.title}
+                  </p>
+                  <p className="mt-3 text-3xl font-semibold text-[#1f1b16] font-[var(--font-display)]">
+                    {item.value}
+                  </p>
+                  <p className="mt-2 text-sm text-[#6a5f55]">{item.detail}</p>
+                  <button className="mt-5 rounded-full border border-[#1f1b16] px-4 py-2 text-xs font-semibold uppercase tracking-[0.25em] transition hover:bg-[#1f1b16] hover:text-[#f7f2e9]">
+                    Manage
+                  </button>
+                </div>
+              ))}
+            </div>
+          </section>
+
           <section
             id="flow"
             className="mx-auto w-full max-w-6xl px-6 pb-20"
@@ -258,7 +296,14 @@ export default function Home() {
                   className="rounded-3xl border border-[#e6d9c8] bg-white/80 p-6 shadow-[0_20px_50px_rgba(31,27,22,0.08)]"
                 >
                   <div className="flex items-center justify-between text-xs uppercase tracking-[0.25em] text-[#8a7d71]">
-                    <span>{card.status}</span>
+                    <span
+                      className={`rounded-full px-3 py-1 text-[10px] font-semibold ${
+                        statusStyles[card.status] ??
+                        "bg-[#f0e6d8] text-[#6a5f55]"
+                      }`}
+                    >
+                      {card.status}
+                    </span>
                     <span>{card.budget}</span>
                   </div>
                   <h3 className="mt-4 text-2xl font-semibold text-[#1f1b16] font-[var(--font-display)]">
