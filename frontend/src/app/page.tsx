@@ -627,6 +627,115 @@ export default function Home() {
             </div>
           </section>
 
+          <section className="mx-auto w-full max-w-6xl px-6 pb-24">
+            <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr]">
+              <div className="rounded-3xl border border-[#e6d9c8] bg-white/80 p-8 shadow-[0_20px_60px_rgba(31,27,22,0.08)]">
+                <div className="flex flex-wrap items-center justify-between gap-4">
+                  <div>
+                    <p className="text-xs uppercase tracking-[0.3em] text-[#8a7d71]">
+                      Proposal detail
+                    </p>
+                    <h3 className="mt-2 text-2xl font-semibold text-[#1f1b16] font-[var(--font-display)]">
+                      Open Source Education Grants
+                    </h3>
+                  </div>
+                  <span
+                    className={`rounded-full px-4 py-2 text-[10px] uppercase tracking-[0.2em] ${
+                      statusStyles.Voting
+                    }`}
+                  >
+                    Voting
+                  </span>
+                </div>
+                <p className="mt-4 text-sm text-[#6a5f55]">
+                  Fund curriculum, mentor stipends, and tooling for community
+                  educators across three regions. Proposal includes milestone
+                  checkpoints every four weeks.
+                </p>
+                <div className="mt-6 grid gap-4 sm:grid-cols-3">
+                  {[
+                    { label: "Requested", value: "$180k" },
+                    { label: "Quorum", value: "4,200 tokens" },
+                    { label: "Ends", value: "2d 4h" },
+                  ].map((item) => (
+                    <div
+                      key={item.label}
+                      className="rounded-2xl border border-[#f0e6d8] bg-[#fdfaf5] px-4 py-3 text-sm text-[#6a5f55]"
+                    >
+                      <p className="text-xs uppercase tracking-[0.2em] text-[#8a7d71]">
+                        {item.label}
+                      </p>
+                      <p className="mt-2 text-lg font-semibold text-[#1f1b16]">
+                        {item.value}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+                <div className="mt-6 rounded-2xl border border-[#f0e6d8] bg-[#fdfaf5] p-5">
+                  <div className="flex items-center justify-between text-xs uppercase tracking-[0.2em] text-[#8a7d71]">
+                    <span>Voting sentiment</span>
+                    <span>2,930 votes cast</span>
+                  </div>
+                  <div className="mt-3 h-2 rounded-full bg-[#ede2d4]">
+                    <div className="h-2 w-[62%] rounded-full bg-[#1f1b16]" />
+                  </div>
+                  <div className="mt-3 flex items-center justify-between text-xs text-[#6a5f55]">
+                    <span>62% yes</span>
+                    <span>18% no</span>
+                    <span>20% abstain</span>
+                  </div>
+                </div>
+                <div className="mt-6 flex flex-wrap gap-3">
+                  <button className="rounded-full bg-[#1f1b16] px-6 py-3 text-sm font-medium text-[#f7f2e9] transition hover:bg-[#3a332c]">
+                    Vote yes
+                  </button>
+                  <button className="rounded-full border border-[#1f1b16] px-6 py-3 text-sm font-medium transition hover:bg-[#1f1b16] hover:text-[#f7f2e9]">
+                    Vote no
+                  </button>
+                  <button className="rounded-full border border-[#d6c7b7] px-6 py-3 text-sm font-medium text-[#6a5f55] transition hover:border-[#1f1b16] hover:text-[#1f1b16]">
+                    Abstain
+                  </button>
+                  <button className="rounded-full border border-[#1f1b16] px-6 py-3 text-sm font-medium transition hover:bg-[#1f1b16] hover:text-[#f7f2e9]">
+                    Execute
+                  </button>
+                </div>
+              </div>
+
+              <div className="rounded-3xl border border-[#1f1b16] bg-[#1f1b16] p-8 text-[#f7f2e9]">
+                <p className="text-xs uppercase tracking-[0.3em] text-[#d9cbbb]">
+                  Execution checklist
+                </p>
+                <h3 className="mt-3 text-2xl font-semibold font-[var(--font-display)]">
+                  Ready to release funds?
+                </h3>
+                <div className="mt-6 grid gap-3 text-sm text-[#d9cbbb]">
+                  {[
+                    "Voting window closed",
+                    "Quorum reached",
+                    "Treasury funded",
+                    "Milestone schedule confirmed",
+                  ].map((item) => (
+                    <div
+                      key={item}
+                      className="flex items-center justify-between rounded-2xl border border-[#2b2621] bg-[#241f1a] px-4 py-3"
+                    >
+                      <span>{item}</span>
+                      <span className="rounded-full bg-[#f7f2e9] px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-[#1f1b16]">
+                        Done
+                      </span>
+                    </div>
+                  ))}
+                </div>
+                <div className="mt-6 rounded-2xl border border-[#2b2621] bg-[#241f1a] p-4 text-xs uppercase tracking-[0.2em] text-[#d9cbbb]">
+                  Next execution window opens in 14h 12m
+                </div>
+                <button className="mt-6 w-full rounded-full bg-[#f7f2e9] px-4 py-3 text-sm font-semibold text-[#1f1b16] transition hover:bg-white">
+                  Queue execution
+                </button>
+              </div>
+            </div>
+          </section>
+
           <section
             id="membership"
             className="mx-auto w-full max-w-6xl px-6 pb-24"
