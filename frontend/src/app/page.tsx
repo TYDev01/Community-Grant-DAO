@@ -67,6 +67,9 @@ export default function Home() {
               <a className="transition hover:text-[#1f1b16]" href="#proposals">
                 Proposals
               </a>
+              <a className="transition hover:text-[#1f1b16]" href="#wallet">
+                Wallet
+              </a>
               <a className="transition hover:text-[#1f1b16]" href="#treasury">
                 Treasury
               </a>
@@ -546,6 +549,134 @@ export default function Home() {
                     ))}
                   </div>
                 </div>
+              </div>
+            </div>
+          </section>
+
+          <section
+            id="wallet"
+            className="mx-auto w-full max-w-6xl px-6 pb-24"
+          >
+            <div className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr]">
+              <div className="rounded-3xl border border-[#e6d9c8] bg-white/80 p-8 shadow-[0_20px_60px_rgba(31,27,22,0.08)]">
+                <p className="text-xs uppercase tracking-[0.3em] text-[#8a7d71]">
+                  Wallet connect
+                </p>
+                <h3 className="mt-3 text-2xl font-semibold text-[#1f1b16] font-[var(--font-display)]">
+                  Start voting in under a minute.
+                </h3>
+                <p className="mt-3 text-sm text-[#6a5f55]">
+                  Link your Stacks wallet, confirm your balance, and sign when
+                  you want to vote. All proposal actions are confirmed on-chain.
+                </p>
+                <div className="mt-6 grid gap-4">
+                  <div className="rounded-2xl border border-[#f0e6d8] bg-[#fdfaf5] p-4 text-sm">
+                    <div className="flex items-center justify-between text-xs uppercase tracking-[0.2em] text-[#8a7d71]">
+                      <span>Step 1</span>
+                      <span className="rounded-full bg-[#d6f2d9] px-3 py-1 text-[10px] font-semibold text-[#246337]">
+                        Complete
+                      </span>
+                    </div>
+                    <p className="mt-3 font-semibold text-[#1f1b16]">
+                      Connect wallet
+                    </p>
+                    <p className="mt-2 text-xs text-[#6a5f55]">
+                      Hiro or Xverse supported.
+                    </p>
+                  </div>
+                  <div className="rounded-2xl border border-[#f0e6d8] bg-[#fdfaf5] p-4 text-sm">
+                    <div className="flex items-center justify-between text-xs uppercase tracking-[0.2em] text-[#8a7d71]">
+                      <span>Step 2</span>
+                      <span className="rounded-full bg-[#f7d8a3] px-3 py-1 text-[10px] font-semibold text-[#5f3c06]">
+                        Pending
+                      </span>
+                    </div>
+                    <p className="mt-3 font-semibold text-[#1f1b16]">
+                      Verify balance
+                    </p>
+                    <p className="mt-2 text-xs text-[#6a5f55]">
+                      Sync governance token holdings.
+                    </p>
+                  </div>
+                  <div className="rounded-2xl border border-[#f0e6d8] bg-[#fdfaf5] p-4 text-sm">
+                    <div className="flex items-center justify-between text-xs uppercase tracking-[0.2em] text-[#8a7d71]">
+                      <span>Step 3</span>
+                      <span className="rounded-full bg-[#ede2d4] px-3 py-1 text-[10px] font-semibold text-[#6a5f55]">
+                        Ready
+                      </span>
+                    </div>
+                    <p className="mt-3 font-semibold text-[#1f1b16]">
+                      Sign transactions
+                    </p>
+                    <p className="mt-2 text-xs text-[#6a5f55]">
+                      Confirm votes and proposal execution.
+                    </p>
+                  </div>
+                </div>
+                <div className="mt-6 flex flex-wrap gap-3">
+                  <button className="rounded-full bg-[#1f1b16] px-6 py-3 text-sm font-medium text-[#f7f2e9] transition hover:bg-[#3a332c]">
+                    Connect wallet
+                  </button>
+                  <button className="rounded-full border border-[#1f1b16] px-6 py-3 text-sm font-medium transition hover:bg-[#1f1b16] hover:text-[#f7f2e9]">
+                    View activity
+                  </button>
+                </div>
+              </div>
+
+              <div className="rounded-3xl border border-[#1f1b16] bg-[#1f1b16] p-8 text-[#f7f2e9]">
+                <p className="text-xs uppercase tracking-[0.3em] text-[#d9cbbb]">
+                  Transaction feedback
+                </p>
+                <h3 className="mt-3 text-2xl font-semibold font-[var(--font-display)]">
+                  See what your vote is doing.
+                </h3>
+                <div className="mt-6 grid gap-4">
+                  <div className="rounded-2xl border border-[#2b2621] bg-[#241f1a] p-4">
+                    <div className="flex items-center justify-between text-xs uppercase tracking-[0.2em] text-[#d9cbbb]">
+                      <span>Broadcasting</span>
+                      <span className="rounded-full bg-[#f7d8a3] px-3 py-1 text-[10px] font-semibold text-[#5f3c06]">
+                        Pending
+                      </span>
+                    </div>
+                    <p className="mt-3 text-base font-semibold">
+                      Vote on Open Source Education Grants
+                    </p>
+                    <p className="mt-2 text-xs text-[#d9cbbb]">
+                      Confirmed by 2 of 6 stacks nodes.
+                    </p>
+                  </div>
+                  <div className="rounded-2xl border border-[#2b2621] bg-[#241f1a] p-4">
+                    <div className="flex items-center justify-between text-xs uppercase tracking-[0.2em] text-[#d9cbbb]">
+                      <span>Finalized</span>
+                      <span className="rounded-full bg-[#d6f2d9] px-3 py-1 text-[10px] font-semibold text-[#246337]">
+                        Success
+                      </span>
+                    </div>
+                    <p className="mt-3 text-base font-semibold">
+                      Draft created: Neighborhood Network Upgrades
+                    </p>
+                    <p className="mt-2 text-xs text-[#d9cbbb]">
+                      Contract call confirmed 3 mins ago.
+                    </p>
+                  </div>
+                  <div className="rounded-2xl border border-[#2b2621] bg-[#241f1a] p-4">
+                    <div className="flex items-center justify-between text-xs uppercase tracking-[0.2em] text-[#d9cbbb]">
+                      <span>Needs attention</span>
+                      <span className="rounded-full bg-[#f7c7bf] px-3 py-1 text-[10px] font-semibold text-[#7f1e18]">
+                        Error
+                      </span>
+                    </div>
+                    <p className="mt-3 text-base font-semibold">
+                      Execute Community Studio Residency
+                    </p>
+                    <p className="mt-2 text-xs text-[#d9cbbb]">
+                      Treasury balance below requested amount.
+                    </p>
+                  </div>
+                </div>
+                <button className="mt-6 w-full rounded-full border border-[#f7f2e9] px-4 py-3 text-sm font-semibold uppercase tracking-[0.2em] text-[#f7f2e9] transition hover:bg-[#f7f2e9] hover:text-[#1f1b16]">
+                  Open transaction log
+                </button>
               </div>
             </div>
           </section>
