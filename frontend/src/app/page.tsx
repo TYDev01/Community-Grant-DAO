@@ -579,6 +579,25 @@ export default function Home() {
                     Transaction: ready
                   </span>
                 </div>
+                <div className="mt-6 grid gap-3 rounded-2xl border border-[#f0e6d8] bg-[#fdfaf5] p-4">
+                  <p className="text-xs uppercase tracking-[0.2em] text-[#8a7d71]">
+                    Draft activity
+                  </p>
+                  <div className="flex items-center justify-between text-xs text-[#6a5f55]">
+                    <span>Saved 14 minutes ago</span>
+                    <span>3 collaborators</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-[10px] uppercase tracking-[0.2em] text-[#8a7d71]">
+                    {["AP", "ME", "YK"].map((initials) => (
+                      <span
+                        key={initials}
+                        className="grid h-7 w-7 place-items-center rounded-full border border-[#e9dfd1] bg-white/80"
+                      >
+                        {initials}
+                      </span>
+                    ))}
+                  </div>
+                </div>
                 <div className="mt-6 grid gap-3 rounded-2xl border border-[#f0e6d8] bg-[#fdfaf5] p-4 text-xs text-[#6a5f55]">
                   <div className="flex items-center justify-between">
                     <span className="uppercase tracking-[0.2em] text-[#8a7d71]">
