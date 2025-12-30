@@ -38,6 +38,15 @@ export default function Home() {
       no: 0,
       ends: "Draft closes in 3d",
     },
+    {
+      title: "Community Transit Data Hub",
+      status: "Passed",
+      budget: "$210k",
+      lead: "Lead: Priya S.",
+      yes: 74,
+      no: 12,
+      ends: "Ready to execute",
+    },
   ];
   return (
     <div className="min-h-screen bg-[#f7f2e9] text-[#1f1b16] font-sans">
@@ -344,14 +353,31 @@ export default function Home() {
                         style={{ width: `${card.yes}%` }}
                       />
                     </div>
-                    <div className="mt-3 flex items-center justify-between text-xs text-[#6a5f55]">
-                      <span>{card.yes}% yes</span>
-                      <span>{card.no}% no</span>
-                    </div>
+                  <div className="mt-3 flex items-center justify-between text-xs text-[#6a5f55]">
+                    <span>{card.yes}% yes</span>
+                    <span>{card.no}% no</span>
                   </div>
-                  <button className="mt-6 rounded-full border border-[#1f1b16] px-4 py-2 text-sm font-medium transition hover:bg-[#1f1b16] hover:text-[#f7f2e9]">
-                    Review proposal
-                  </button>
+                </div>
+                  <div className="mt-6 flex flex-wrap gap-3">
+                    {card.status === "Voting" ? (
+                      <>
+                        <button className="rounded-full bg-[#1f1b16] px-4 py-2 text-sm font-medium text-[#f7f2e9] transition hover:bg-[#3a332c]">
+                          Vote yes
+                        </button>
+                        <button className="rounded-full border border-[#1f1b16] px-4 py-2 text-sm font-medium transition hover:bg-[#1f1b16] hover:text-[#f7f2e9]">
+                          Vote no
+                        </button>
+                      </>
+                    ) : card.status === "Passed" ? (
+                      <button className="rounded-full bg-[#1f1b16] px-4 py-2 text-sm font-medium text-[#f7f2e9] transition hover:bg-[#3a332c]">
+                        Execute
+                      </button>
+                    ) : (
+                      <button className="rounded-full border border-[#1f1b16] px-4 py-2 text-sm font-medium transition hover:bg-[#1f1b16] hover:text-[#f7f2e9]">
+                        Review proposal
+                      </button>
+                    )}
+                  </div>
                 </div>
               ))}
             </div>
