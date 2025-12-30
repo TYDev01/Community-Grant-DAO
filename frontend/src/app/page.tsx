@@ -1,4 +1,44 @@
 export default function Home() {
+  const statusStyles: Record<string, string> = {
+    Voting: "bg-[#1f1b16] text-[#f7f2e9]",
+    Review: "bg-[#f7d8a3] text-[#5f3c06]",
+    Draft: "bg-[#d8edf0] text-[#20545d]",
+    Passed: "bg-[#d6f2d9] text-[#246337]",
+    Failed: "bg-[#f7c7bf] text-[#7f1e18]",
+    Executed: "bg-[#e3ddfb] text-[#3f2f7a]",
+    Success: "bg-[#d6f2d9] text-[#246337]",
+    Pending: "bg-[#f7d8a3] text-[#5f3c06]",
+    Error: "bg-[#f7c7bf] text-[#7f1e18]",
+  };
+  const proposals = [
+    {
+      title: "Open Source Education Grants",
+      status: "Voting",
+      budget: "$180k",
+      lead: "Lead: Aisha P.",
+      yes: 62,
+      no: 18,
+      ends: "Ends in 2d 4h",
+    },
+    {
+      title: "Neighborhood Network Upgrades",
+      status: "Review",
+      budget: "$95k",
+      lead: "Lead: Mateo C.",
+      yes: 44,
+      no: 9,
+      ends: "Voting opens in 6h",
+    },
+    {
+      title: "Community Studio Residency",
+      status: "Draft",
+      budget: "$42k",
+      lead: "Lead: Yara K.",
+      yes: 0,
+      no: 0,
+      ends: "Draft closes in 3d",
+    },
+  ];
   return (
     <div className="min-h-screen bg-[#f7f2e9] text-[#1f1b16] font-sans">
       <div className="relative overflow-hidden">
@@ -212,26 +252,7 @@ export default function Home() {
               </div>
             </div>
             <div className="mt-10 grid gap-6 lg:grid-cols-3">
-              {[
-                {
-                  title: "Open Source Education Grants",
-                  status: "Voting",
-                  budget: "$180k",
-                  lead: "Lead: Aisha P.",
-                },
-                {
-                  title: "Neighborhood Network Upgrades",
-                  status: "Refining",
-                  budget: "$95k",
-                  lead: "Lead: Mateo C.",
-                },
-                {
-                  title: "Community Studio Residency",
-                  status: "Drafting",
-                  budget: "$42k",
-                  lead: "Lead: Yara K.",
-                },
-              ].map((card) => (
+              {proposals.map((card) => (
                 <div
                   key={card.title}
                   className="rounded-3xl border border-[#e6d9c8] bg-white/80 p-6 shadow-[0_20px_50px_rgba(31,27,22,0.08)]"
@@ -243,14 +264,244 @@ export default function Home() {
                   <h3 className="mt-4 text-2xl font-semibold text-[#1f1b16] font-[var(--font-display)]">
                     {card.title}
                   </h3>
-                  <p className="mt-3 text-sm text-[#6a5f55]">
-                    {card.lead}
-                  </p>
+                  <p className="mt-3 text-sm text-[#6a5f55]">{card.lead}</p>
+                  <div className="mt-5 rounded-2xl border border-[#f0e6d8] bg-[#fdfaf5] p-4">
+                    <div className="flex items-center justify-between text-xs uppercase tracking-[0.2em] text-[#8a7d71]">
+                      <span>Support</span>
+                      <span>{card.ends}</span>
+                    </div>
+                    <div className="mt-3 h-2 rounded-full bg-[#ede2d4]">
+                      <div
+                        className="h-2 rounded-full bg-[#1f1b16]"
+                        style={{ width: `${card.yes}%` }}
+                      />
+                    </div>
+                    <div className="mt-3 flex items-center justify-between text-xs text-[#6a5f55]">
+                      <span>{card.yes}% yes</span>
+                      <span>{card.no}% no</span>
+                    </div>
+                  </div>
                   <button className="mt-6 rounded-full border border-[#1f1b16] px-4 py-2 text-sm font-medium transition hover:bg-[#1f1b16] hover:text-[#f7f2e9]">
                     Review proposal
                   </button>
                 </div>
               ))}
+            </div>
+          </section>
+
+          <section className="mx-auto w-full max-w-6xl px-6 pb-20">
+            <div className="flex flex-wrap items-center justify-between gap-6">
+              <div>
+                <p className="text-sm uppercase tracking-[0.25em] text-[#7f7267]">
+                  Governance workspace
+                </p>
+                <h2 className="mt-3 text-3xl font-semibold text-[#1f1b16] font-[var(--font-display)]">
+                  Draft, vote, and execute in one place.
+                </h2>
+              </div>
+              <div className="flex flex-wrap gap-2 text-xs uppercase tracking-[0.2em] text-[#7b6f65]">
+                {[
+                  "All",
+                  "Active",
+                  "Pending",
+                  "Passed",
+                  "Failed",
+                  "Executed",
+                  "Canceled",
+                ].map((filter) => (
+                  <button
+                    key={filter}
+                    className="rounded-full border border-[#d6c7b7] px-3 py-2 transition hover:border-[#1f1b16] hover:text-[#1f1b16]"
+                  >
+                    {filter}
+                  </button>
+                ))}
+              </div>
+            </div>
+            <div className="mt-10 grid gap-8 lg:grid-cols-[1.05fr_0.95fr]">
+              <div className="rounded-3xl border border-[#e6d9c8] bg-white/80 p-8 shadow-[0_20px_60px_rgba(31,27,22,0.08)]">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-xs uppercase tracking-[0.3em] text-[#8a7d71]">
+                      Create proposal
+                    </p>
+                    <h3 className="mt-2 text-2xl font-semibold text-[#1f1b16] font-[var(--font-display)]">
+                      Fund a new initiative
+                    </h3>
+                  </div>
+                  <span className="rounded-full bg-[#f0e6d8] px-3 py-1 text-xs uppercase tracking-[0.2em] text-[#6a5f55]">
+                    Draft mode
+                  </span>
+                </div>
+                <div className="mt-6 grid gap-4">
+                  {[
+                    { label: "Proposal title", placeholder: "Ex: Civic data toolkit" },
+                    { label: "Budget request", placeholder: "$75,000" },
+                  ].map((field) => (
+                    <label key={field.label} className="grid gap-2 text-sm text-[#6a5f55]">
+                      <span className="text-xs uppercase tracking-[0.2em] text-[#8a7d71]">
+                        {field.label}
+                      </span>
+                      <div className="rounded-2xl border border-[#e6d9c8] bg-[#fdfaf5] px-4 py-3 text-[#a29589]">
+                        {field.placeholder}
+                      </div>
+                    </label>
+                  ))}
+                  <label className="grid gap-2 text-sm text-[#6a5f55]">
+                    <span className="text-xs uppercase tracking-[0.2em] text-[#8a7d71]">
+                      Category + Milestones
+                    </span>
+                    <div className="grid gap-3 rounded-2xl border border-[#e6d9c8] bg-[#fdfaf5] p-4 text-xs text-[#6a5f55]">
+                      {[
+                        "Local infrastructure",
+                        "Open source tools",
+                        "Education + training",
+                      ].map((item) => (
+                        <div
+                          key={item}
+                          className="flex items-center justify-between rounded-xl border border-[#e9dfd1] bg-white/80 px-3 py-2"
+                        >
+                          <span>{item}</span>
+                          <span className="text-[10px] uppercase tracking-[0.2em] text-[#8a7d71]">
+                            3 milestones
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  </label>
+                  <label className="grid gap-2 text-sm text-[#6a5f55]">
+                    <span className="text-xs uppercase tracking-[0.2em] text-[#8a7d71]">
+                      Voting window
+                    </span>
+                    <div className="grid gap-3 rounded-2xl border border-[#e6d9c8] bg-[#fdfaf5] p-4 text-xs text-[#6a5f55] sm:grid-cols-2">
+                      {["Start block", "End block"].map((item) => (
+                        <div
+                          key={item}
+                          className="rounded-xl border border-[#e9dfd1] bg-white/80 px-3 py-2 text-[#a29589]"
+                        >
+                          {item}
+                        </div>
+                      ))}
+                    </div>
+                  </label>
+                </div>
+                <div className="mt-6 flex flex-wrap items-center gap-4">
+                  <button className="rounded-full bg-[#1f1b16] px-6 py-3 text-sm font-medium text-[#f7f2e9] transition hover:bg-[#3a332c]">
+                    Save draft
+                  </button>
+                  <button className="rounded-full border border-[#1f1b16] px-6 py-3 text-sm font-medium transition hover:bg-[#1f1b16] hover:text-[#f7f2e9]">
+                    Submit to review
+                  </button>
+                  <span className="text-xs uppercase tracking-[0.2em] text-[#8a7d71]">
+                    Transaction: ready
+                  </span>
+                </div>
+              </div>
+
+              <div className="grid gap-6">
+                <div className="rounded-3xl border border-[#1f1b16] bg-[#1f1b16] p-6 text-[#f7f2e9]">
+                  <p className="text-xs uppercase tracking-[0.25em] text-[#d9cbbb]">
+                    Live queue
+                  </p>
+                  <h3 className="mt-3 text-2xl font-semibold font-[var(--font-display)]">
+                    Decisions awaiting action
+                  </h3>
+                  <div className="mt-6 grid gap-4">
+                    {[
+                      {
+                        title: "City Commons Microgrants",
+                        status: "Voting",
+                        budget: "$32k",
+                        support: "58% yes",
+                        action: "Cast vote",
+                      },
+                      {
+                        title: "Open Data Residency",
+                        status: "Passed",
+                        budget: "$120k",
+                        support: "76% yes",
+                        action: "Execute",
+                      },
+                      {
+                        title: "Community Hardware Lab",
+                        status: "Failed",
+                        budget: "$68k",
+                        support: "42% yes",
+                        action: "Archive",
+                      },
+                    ].map((item) => (
+                      <div
+                        key={item.title}
+                        className="rounded-2xl border border-[#2b2621] bg-[#241f1a] px-4 py-4"
+                      >
+                        <div className="flex items-center justify-between gap-3 text-xs uppercase tracking-[0.2em] text-[#d9cbbb]">
+                          <span className="rounded-full bg-[#f7f2e9] px-3 py-1 text-[10px] font-semibold text-[#1f1b16]">
+                            {item.status}
+                          </span>
+                          <span>{item.budget}</span>
+                        </div>
+                        <p className="mt-3 text-base font-semibold">
+                          {item.title}
+                        </p>
+                        <div className="mt-2 flex items-center justify-between text-xs text-[#d9cbbb]">
+                          <span>{item.support}</span>
+                          <button className="rounded-full border border-[#f7f2e9] px-3 py-1 text-[10px] uppercase tracking-[0.2em] text-[#f7f2e9] transition hover:bg-[#f7f2e9] hover:text-[#1f1b16]">
+                            {item.action}
+                          </button>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                <div className="rounded-3xl border border-[#e6d9c8] bg-white/80 p-6">
+                  <p className="text-xs uppercase tracking-[0.25em] text-[#8a7d71]">
+                    Transaction feed
+                  </p>
+                  <h3 className="mt-3 text-xl font-semibold text-[#1f1b16] font-[var(--font-display)]">
+                    Latest on-chain activity
+                  </h3>
+                  <div className="mt-4 grid gap-3 text-sm text-[#6a5f55]">
+                    {[
+                      {
+                        label: "Vote recorded",
+                        detail: "Open Source Education Grants",
+                        status: "Success",
+                      },
+                      {
+                        label: "Proposal created",
+                        detail: "Neighborhood Network Upgrades",
+                        status: "Pending",
+                      },
+                      {
+                        label: "Execution failed",
+                        detail: "Community Studio Residency",
+                        status: "Error",
+                      },
+                    ].map((item) => (
+                      <div
+                        key={item.detail}
+                        className="flex items-center justify-between rounded-2xl border border-[#f0e6d8] bg-[#fdfaf5] px-4 py-3"
+                      >
+                        <div>
+                          <p className="text-sm font-semibold text-[#1f1b16]">
+                            {item.label}
+                          </p>
+                          <p className="text-xs uppercase tracking-[0.2em] text-[#8a7d71]">
+                            {item.detail}
+                          </p>
+                        </div>
+                        <span
+                          className={`rounded-full px-3 py-1 text-[10px] uppercase tracking-[0.2em] ${
+                            statusStyles[item.status] ?? "bg-[#f0e6d8] text-[#6a5f55]"
+                          }`}
+                        >
+                          {item.status}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
             </div>
           </section>
 
