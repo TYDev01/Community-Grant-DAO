@@ -6,6 +6,7 @@ export default function Home() {
     Passed: "bg-[#d6f2d9] text-[#246337]",
     Failed: "bg-[#f7c7bf] text-[#7f1e18]",
     Executed: "bg-[#e3ddfb] text-[#3f2f7a]",
+    Canceled: "bg-[#ede2d4] text-[#6a5f55]",
     Success: "bg-[#d6f2d9] text-[#246337]",
     Pending: "bg-[#f7d8a3] text-[#5f3c06]",
     Error: "bg-[#f7c7bf] text-[#7f1e18]",
@@ -64,6 +65,15 @@ export default function Home() {
       yes: 81,
       no: 9,
       ends: "Executed 3d ago",
+    },
+    {
+      title: "Regional Health Equity Pilot",
+      status: "Canceled",
+      budget: "$88k",
+      lead: "Lead: Theo N.",
+      yes: 12,
+      no: 4,
+      ends: "Canceled 5h ago",
     },
   ];
   return (
@@ -317,6 +327,7 @@ export default function Home() {
                     "Passed",
                     "Failed",
                     "Executed",
+                    "Canceled",
                   ].map((label) => (
                     <span
                       key={label}
@@ -389,6 +400,22 @@ export default function Home() {
                     ) : card.status === "Passed" ? (
                       <button className="rounded-full bg-[#1f1b16] px-4 py-2 text-sm font-medium text-[#f7f2e9] transition hover:bg-[#3a332c]">
                         Execute
+                      </button>
+                    ) : card.status === "Draft" ? (
+                      <button className="rounded-full border border-[#1f1b16] px-4 py-2 text-sm font-medium transition hover:bg-[#1f1b16] hover:text-[#f7f2e9]">
+                        Continue draft
+                      </button>
+                    ) : card.status === "Failed" ? (
+                      <button className="rounded-full border border-[#1f1b16] px-4 py-2 text-sm font-medium transition hover:bg-[#1f1b16] hover:text-[#f7f2e9]">
+                        View report
+                      </button>
+                    ) : card.status === "Executed" ? (
+                      <button className="rounded-full border border-[#1f1b16] px-4 py-2 text-sm font-medium transition hover:bg-[#1f1b16] hover:text-[#f7f2e9]">
+                        View payout
+                      </button>
+                    ) : card.status === "Canceled" ? (
+                      <button className="rounded-full border border-[#1f1b16] px-4 py-2 text-sm font-medium transition hover:bg-[#1f1b16] hover:text-[#f7f2e9]">
+                        Archive
                       </button>
                     ) : (
                       <button className="rounded-full border border-[#1f1b16] px-4 py-2 text-sm font-medium transition hover:bg-[#1f1b16] hover:text-[#f7f2e9]">
