@@ -6,6 +6,7 @@ export default function Home() {
     Passed: "bg-[#d6f2d9] text-[#246337]",
     Failed: "bg-[#f7c7bf] text-[#7f1e18]",
     Executed: "bg-[#e3ddfb] text-[#3f2f7a]",
+    Canceled: "bg-[#ede2d4] text-[#6a5f55]",
     Success: "bg-[#d6f2d9] text-[#246337]",
     Pending: "bg-[#f7d8a3] text-[#5f3c06]",
     Error: "bg-[#f7c7bf] text-[#7f1e18]",
@@ -64,6 +65,15 @@ export default function Home() {
       yes: 81,
       no: 9,
       ends: "Executed 3d ago",
+    },
+    {
+      title: "Regional Health Equity Pilot",
+      status: "Canceled",
+      budget: "$88k",
+      lead: "Lead: Theo N.",
+      yes: 12,
+      no: 4,
+      ends: "Canceled 5h ago",
     },
   ];
   return (
@@ -317,6 +327,7 @@ export default function Home() {
                     "Passed",
                     "Failed",
                     "Executed",
+                    "Canceled",
                   ].map((label) => (
                     <span
                       key={label}
@@ -389,6 +400,22 @@ export default function Home() {
                     ) : card.status === "Passed" ? (
                       <button className="rounded-full bg-[#1f1b16] px-4 py-2 text-sm font-medium text-[#f7f2e9] transition hover:bg-[#3a332c]">
                         Execute
+                      </button>
+                    ) : card.status === "Draft" ? (
+                      <button className="rounded-full border border-[#1f1b16] px-4 py-2 text-sm font-medium transition hover:bg-[#1f1b16] hover:text-[#f7f2e9]">
+                        Continue draft
+                      </button>
+                    ) : card.status === "Failed" ? (
+                      <button className="rounded-full border border-[#1f1b16] px-4 py-2 text-sm font-medium transition hover:bg-[#1f1b16] hover:text-[#f7f2e9]">
+                        View report
+                      </button>
+                    ) : card.status === "Executed" ? (
+                      <button className="rounded-full border border-[#1f1b16] px-4 py-2 text-sm font-medium transition hover:bg-[#1f1b16] hover:text-[#f7f2e9]">
+                        View payout
+                      </button>
+                    ) : card.status === "Canceled" ? (
+                      <button className="rounded-full border border-[#1f1b16] px-4 py-2 text-sm font-medium transition hover:bg-[#1f1b16] hover:text-[#f7f2e9]">
+                        Archive
                       </button>
                     ) : (
                       <button className="rounded-full border border-[#1f1b16] px-4 py-2 text-sm font-medium transition hover:bg-[#1f1b16] hover:text-[#f7f2e9]">
@@ -942,6 +969,89 @@ export default function Home() {
                     </div>
                   ))}
                 </div>
+              </div>
+            </div>
+            <div className="mt-10 grid gap-6 lg:grid-cols-[1.05fr_0.95fr]">
+              <div className="rounded-3xl border border-[#e6d9c8] bg-white/80 p-6 shadow-[0_20px_60px_rgba(31,27,22,0.06)]">
+                <p className="text-xs uppercase tracking-[0.3em] text-[#8a7d71]">
+                  Treasury activity
+                </p>
+                <h3 className="mt-3 text-2xl font-semibold text-[#1f1b16] font-[var(--font-display)]">
+                  Recent inflows and payouts.
+                </h3>
+                <div className="mt-5 grid gap-3 text-sm text-[#6a5f55]">
+                  {[
+                    {
+                      label: "Membership dues",
+                      value: "+$42k",
+                      time: "Today",
+                    },
+                    {
+                      label: "Grant payout: Education Grants",
+                      value: "-$60k",
+                      time: "Yesterday",
+                    },
+                    {
+                      label: "Partner matching fund",
+                      value: "+$120k",
+                      time: "2 days ago",
+                    },
+                  ].map((item) => (
+                    <div
+                      key={item.label}
+                      className="flex items-center justify-between rounded-2xl border border-[#f0e6d8] bg-[#fdfaf5] px-4 py-3"
+                    >
+                      <div>
+                        <p className="text-sm font-semibold text-[#1f1b16]">
+                          {item.label}
+                        </p>
+                        <p className="mt-1 text-xs uppercase tracking-[0.2em] text-[#8a7d71]">
+                          {item.time}
+                        </p>
+                      </div>
+                      <span className="text-base font-semibold text-[#1f1b16]">
+                        {item.value}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div className="rounded-3xl border border-[#1f1b16] bg-[#1f1b16] p-6 text-[#f7f2e9]">
+                <p className="text-xs uppercase tracking-[0.3em] text-[#d9cbbb]">
+                  Funding calendar
+                </p>
+                <h3 className="mt-3 text-2xl font-semibold font-[var(--font-display)]">
+                  Next treasury commitments.
+                </h3>
+                <div className="mt-5 grid gap-3 text-sm text-[#d9cbbb]">
+                  {[
+                    {
+                      label: "Grant tranche release",
+                      detail: "Oct 12 · $45k",
+                    },
+                    {
+                      label: "Operations payroll",
+                      detail: "Oct 16 · $18k",
+                    },
+                    {
+                      label: "Community pod budgets",
+                      detail: "Oct 20 · $32k",
+                    },
+                  ].map((item) => (
+                    <div
+                      key={item.label}
+                      className="flex items-center justify-between rounded-2xl border border-[#2b2621] bg-[#241f1a] px-4 py-3"
+                    >
+                      <span>{item.label}</span>
+                      <span className="rounded-full bg-[#f7f2e9] px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-[#1f1b16]">
+                        {item.detail}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+                <button className="mt-6 w-full rounded-full border border-[#f7f2e9] px-4 py-3 text-sm font-semibold uppercase tracking-[0.2em] text-[#f7f2e9] transition hover:bg-[#f7f2e9] hover:text-[#1f1b16]">
+                  View treasury forecast
+                </button>
               </div>
             </div>
           </section>
