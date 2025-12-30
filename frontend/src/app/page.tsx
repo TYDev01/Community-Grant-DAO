@@ -76,6 +76,46 @@ export default function Home() {
       ends: "Canceled 5h ago",
     },
   ];
+  const liveQueue = [
+    {
+      title: "City Commons Microgrants",
+      status: "Voting",
+      budget: "$32k",
+      support: "58% yes",
+      action: "Cast vote",
+    },
+    {
+      title: "Open Data Residency",
+      status: "Passed",
+      budget: "$120k",
+      support: "76% yes",
+      action: "Execute",
+    },
+    {
+      title: "Community Hardware Lab",
+      status: "Failed",
+      budget: "$68k",
+      support: "42% yes",
+      action: "Archive",
+    },
+  ];
+  const transactionFeed = [
+    {
+      label: "Vote recorded",
+      detail: "Open Source Education Grants",
+      status: "Success",
+    },
+    {
+      label: "Proposal created",
+      detail: "Neighborhood Network Upgrades",
+      status: "Pending",
+    },
+    {
+      label: "Execution failed",
+      detail: "Community Studio Residency",
+      status: "Error",
+    },
+  ];
   return (
     <div className="min-h-screen bg-[#f7f2e9] text-[#1f1b16] font-sans">
       <div className="relative overflow-hidden">
@@ -254,6 +294,41 @@ export default function Home() {
                   <button className="mt-5 rounded-full border border-[#1f1b16] px-4 py-2 text-xs font-semibold uppercase tracking-[0.25em] transition hover:bg-[#1f1b16] hover:text-[#f7f2e9]">
                     Manage
                   </button>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          <section className="mx-auto w-full max-w-6xl px-6 pb-20">
+            <div className="grid gap-6 md:grid-cols-3">
+              {[
+                {
+                  title: "Participation rate",
+                  value: "68%",
+                  detail: "Last 30 days",
+                },
+                {
+                  title: "Avg. vote duration",
+                  value: "3.6 days",
+                  detail: "Window size",
+                },
+                {
+                  title: "Funds allocated",
+                  value: "$1.2M",
+                  detail: "This quarter",
+                },
+              ].map((item) => (
+                <div
+                  key={item.title}
+                  className="rounded-3xl border border-[#e6d9c8] bg-white/80 p-6 text-[#6a5f55] shadow-[0_18px_45px_rgba(31,27,22,0.06)]"
+                >
+                  <p className="text-xs uppercase tracking-[0.3em] text-[#8a7d71]">
+                    {item.title}
+                  </p>
+                  <p className="mt-3 text-3xl font-semibold text-[#1f1b16] font-[var(--font-display)]">
+                    {item.value}
+                  </p>
+                  <p className="mt-2 text-sm">{item.detail}</p>
                 </div>
               ))}
             </div>
@@ -641,29 +716,7 @@ export default function Home() {
                     Decisions awaiting action
                   </h3>
                   <div className="mt-6 grid gap-4">
-                    {[
-                      {
-                        title: "City Commons Microgrants",
-                        status: "Voting",
-                        budget: "$32k",
-                        support: "58% yes",
-                        action: "Cast vote",
-                      },
-                      {
-                        title: "Open Data Residency",
-                        status: "Passed",
-                        budget: "$120k",
-                        support: "76% yes",
-                        action: "Execute",
-                      },
-                      {
-                        title: "Community Hardware Lab",
-                        status: "Failed",
-                        budget: "$68k",
-                        support: "42% yes",
-                        action: "Archive",
-                      },
-                    ].map((item) => (
+                    {liveQueue.map((item) => (
                       <div
                         key={item.title}
                         className="rounded-2xl border border-[#2b2621] bg-[#241f1a] px-4 py-4"
@@ -695,23 +748,7 @@ export default function Home() {
                     Latest on-chain activity
                   </h3>
                   <div className="mt-4 grid gap-3 text-sm text-[#6a5f55]">
-                    {[
-                      {
-                        label: "Vote recorded",
-                        detail: "Open Source Education Grants",
-                        status: "Success",
-                      },
-                      {
-                        label: "Proposal created",
-                        detail: "Neighborhood Network Upgrades",
-                        status: "Pending",
-                      },
-                      {
-                        label: "Execution failed",
-                        detail: "Community Studio Residency",
-                        status: "Error",
-                      },
-                    ].map((item) => (
+                    {transactionFeed.map((item) => (
                       <div
                         key={item.detail}
                         className="flex items-center justify-between rounded-2xl border border-[#f0e6d8] bg-[#fdfaf5] px-4 py-3"
