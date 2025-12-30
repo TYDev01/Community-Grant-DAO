@@ -426,6 +426,29 @@ export default function Home() {
                 </div>
               ))}
             </div>
+            <div className="mt-8 flex flex-wrap items-center justify-between gap-4 text-xs uppercase tracking-[0.2em] text-[#7b6f65]">
+              <span>Showing 1-6 of 42 proposals</span>
+              <div className="flex flex-wrap items-center gap-2">
+                <button className="rounded-full border border-[#d6c7b7] px-3 py-2 transition hover:border-[#1f1b16] hover:text-[#1f1b16]">
+                  Previous
+                </button>
+                {["1", "2", "3", "4"].map((page) => (
+                  <button
+                    key={page}
+                    className={`rounded-full px-3 py-2 transition ${
+                      page === "1"
+                        ? "bg-[#1f1b16] text-[#f7f2e9]"
+                        : "border border-[#d6c7b7] hover:border-[#1f1b16] hover:text-[#1f1b16]"
+                    }`}
+                  >
+                    {page}
+                  </button>
+                ))}
+                <button className="rounded-full border border-[#d6c7b7] px-3 py-2 transition hover:border-[#1f1b16] hover:text-[#1f1b16]">
+                  Next
+                </button>
+              </div>
+            </div>
           </section>
 
           <section className="mx-auto w-full max-w-6xl px-6 pb-20">
