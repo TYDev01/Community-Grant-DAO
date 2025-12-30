@@ -1429,6 +1429,68 @@ export default function Home() {
               </div>
             </div>
           </section>
+
+          <section className="mx-auto w-full max-w-6xl px-6 pb-24">
+            <div className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr]">
+              <div className="rounded-3xl border border-[#1f1b16] bg-[#1f1b16] p-8 text-[#f7f2e9]">
+                <p className="text-xs uppercase tracking-[0.3em] text-[#d9cbbb]">
+                  Help desk
+                </p>
+                <h2 className="mt-3 text-3xl font-semibold font-[var(--font-display)]">
+                  Answers for every governance role.
+                </h2>
+                <p className="mt-3 text-sm text-[#d9cbbb]">
+                  Find quick guidance on proposal windows, voting rules, and
+                  treasury releases without leaving the workspace.
+                </p>
+                <div className="mt-6 grid gap-3 text-sm text-[#d9cbbb]">
+                  {[
+                    "How to open a proposal window",
+                    "What happens when quorum is missed",
+                    "When the treasury can execute payouts",
+                    "How to cancel or revise a draft",
+                  ].map((item) => (
+                    <div
+                      key={item}
+                      className="flex items-center justify-between rounded-2xl border border-[#2b2621] bg-[#241f1a] px-4 py-3"
+                    >
+                      <span>{item}</span>
+                      <span className="rounded-full bg-[#f7f2e9] px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-[#1f1b16]">
+                        Read
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="rounded-3xl border border-[#e6d9c8] bg-white/80 p-8 shadow-[0_20px_60px_rgba(31,27,22,0.08)]">
+                <p className="text-xs uppercase tracking-[0.3em] text-[#8a7d71]">
+                  Governance digest
+                </p>
+                <h3 className="mt-3 text-2xl font-semibold text-[#1f1b16] font-[var(--font-display)]">
+                  Weekly updates for members.
+                </h3>
+                <p className="mt-3 text-sm text-[#6a5f55]">
+                  Get proposal highlights, treasury movements, and voting
+                  reminders in one email.
+                </p>
+                <div className="mt-6 grid gap-3">
+                  <div className="rounded-2xl border border-[#e6d9c8] bg-[#fdfaf5] px-4 py-3 text-sm text-[#a29589]">
+                    your@email.com
+                  </div>
+                  <button className="rounded-full bg-[#1f1b16] px-6 py-3 text-sm font-medium text-[#f7f2e9] transition hover:bg-[#3a332c]">
+                    Subscribe
+                  </button>
+                  <p className="text-xs text-[#8a7d71]">
+                    1,420 members already receive the digest.
+                  </p>
+                </div>
+                <div className="mt-6 rounded-2xl border border-[#f0e6d8] bg-[#fdfaf5] p-4 text-xs uppercase tracking-[0.2em] text-[#8a7d71]">
+                  Next release: Monday 9:00 AM UTC
+                </div>
+              </div>
+            </div>
+          </section>
         </main>
 
         <footer className="relative z-10 border-t border-[#e6d9c8]">
