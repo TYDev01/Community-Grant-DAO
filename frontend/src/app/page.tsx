@@ -816,6 +816,52 @@ export default function Home() {
                     <span>20% abstain</span>
                   </div>
                 </div>
+                <div className="mt-6 grid gap-4">
+                  <div className="rounded-2xl border border-[#f0e6d8] bg-[#fdfaf5] p-5">
+                    <p className="text-xs uppercase tracking-[0.2em] text-[#8a7d71]">
+                      Milestone timeline
+                    </p>
+                    <div className="mt-4 grid gap-3 text-sm text-[#6a5f55]">
+                      {[
+                        "Week 1: Curriculum outline + mentor roster",
+                        "Week 4: Pilot cohort launch + feedback survey",
+                        "Week 8: Tooling kit + public report",
+                      ].map((item) => (
+                        <div
+                          key={item}
+                          className="flex items-center justify-between rounded-xl border border-[#e9dfd1] bg-white/80 px-3 py-2"
+                        >
+                          <span>{item}</span>
+                          <span className="text-[10px] uppercase tracking-[0.2em] text-[#8a7d71]">
+                            Scheduled
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="rounded-2xl border border-[#f0e6d8] bg-[#fdfaf5] p-5">
+                    <p className="text-xs uppercase tracking-[0.2em] text-[#8a7d71]">
+                      Funding releases
+                    </p>
+                    <div className="mt-4 grid gap-3 text-sm text-[#6a5f55]">
+                      {[
+                        { label: "Initial tranche", value: "$60k" },
+                        { label: "Midpoint release", value: "$70k" },
+                        { label: "Final delivery", value: "$50k" },
+                      ].map((item) => (
+                        <div
+                          key={item.label}
+                          className="flex items-center justify-between rounded-xl border border-[#e9dfd1] bg-white/80 px-3 py-2"
+                        >
+                          <span>{item.label}</span>
+                          <span className="font-semibold text-[#1f1b16]">
+                            {item.value}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
                 <div className="mt-6 flex flex-wrap gap-3">
                   <button className="rounded-full bg-[#1f1b16] px-6 py-3 text-sm font-medium text-[#f7f2e9] transition hover:bg-[#3a332c]">
                     Vote yes
