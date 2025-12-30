@@ -438,21 +438,28 @@ export default function Home() {
                   Draft, vote, and execute in one place.
                 </h2>
               </div>
-              <div className="flex flex-wrap gap-2 text-xs uppercase tracking-[0.2em] text-[#7b6f65]">
+              <div className="flex flex-wrap items-center gap-2 text-xs uppercase tracking-[0.2em] text-[#7b6f65]">
+                <div className="rounded-full border border-[#d6c7b7] px-4 py-2 text-[10px] text-[#a29589]">
+                  Search proposals
+                </div>
                 {[
-                  "All",
-                  "Active",
-                  "Pending",
-                  "Passed",
-                  "Failed",
-                  "Executed",
-                  "Canceled",
+                  { label: "All", active: false },
+                  { label: "Active", active: true },
+                  { label: "Pending", active: false },
+                  { label: "Passed", active: false },
+                  { label: "Failed", active: false },
+                  { label: "Executed", active: false },
+                  { label: "Canceled", active: false },
                 ].map((filter) => (
                   <button
-                    key={filter}
-                    className="rounded-full border border-[#d6c7b7] px-3 py-2 transition hover:border-[#1f1b16] hover:text-[#1f1b16]"
+                    key={filter.label}
+                    className={`rounded-full px-3 py-2 transition ${
+                      filter.active
+                        ? "bg-[#1f1b16] text-[#f7f2e9]"
+                        : "border border-[#d6c7b7] hover:border-[#1f1b16] hover:text-[#1f1b16]"
+                    }`}
                   >
-                    {filter}
+                    {filter.label}
                   </button>
                 ))}
               </div>
