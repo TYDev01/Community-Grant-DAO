@@ -442,6 +442,12 @@ export default function Home() {
                 <div className="rounded-full border border-[#d6c7b7] px-4 py-2 text-[10px] text-[#a29589]">
                   Search proposals
                 </div>
+                <div className="flex items-center gap-2 rounded-full border border-[#d6c7b7] px-3 py-2 text-[10px] text-[#6a5f55]">
+                  <span>Sort</span>
+                  <span className="rounded-full bg-[#f0e6d8] px-2 py-1 text-[9px] uppercase tracking-[0.2em] text-[#6a5f55]">
+                    Newest
+                  </span>
+                </div>
                 {[
                   { label: "All", active: false },
                   { label: "Active", active: true },
