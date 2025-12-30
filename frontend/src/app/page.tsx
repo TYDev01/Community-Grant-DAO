@@ -282,6 +282,26 @@ export default function Home() {
                 <h2 className="mt-3 text-3xl font-semibold text-[#1f1b16] font-[var(--font-display)]">
                   Decisions happening now.
                 </h2>
+                <div className="mt-4 flex flex-wrap gap-2 text-[10px] uppercase tracking-[0.2em]">
+                  {[
+                    "Voting",
+                    "Review",
+                    "Draft",
+                    "Passed",
+                    "Failed",
+                    "Executed",
+                  ].map((label) => (
+                    <span
+                      key={label}
+                      className={`rounded-full px-3 py-1 font-semibold ${
+                        statusStyles[label] ??
+                        "bg-[#f0e6d8] text-[#6a5f55]"
+                      }`}
+                    >
+                      {label}
+                    </span>
+                  ))}
+                </div>
               </div>
               <div className="flex gap-3 text-xs uppercase tracking-[0.2em] text-[#7b6f65]">
                 <span className="rounded-full border border-[#d6c7b7] px-3 py-2">
