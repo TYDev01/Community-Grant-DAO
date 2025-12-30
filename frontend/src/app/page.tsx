@@ -1362,6 +1362,73 @@ export default function Home() {
               </div>
             </div>
           </section>
+
+          <section className="mx-auto w-full max-w-6xl px-6 pb-24">
+            <div className="rounded-3xl border border-[#e6d9c8] bg-[#fdfaf5] p-10">
+              <div className="grid gap-10 lg:grid-cols-[1.05fr_0.95fr]">
+                <div>
+                  <p className="text-sm uppercase tracking-[0.25em] text-[#7f7267]">
+                    Community updates
+                  </p>
+                  <h2 className="mt-3 text-3xl font-semibold text-[#1f1b16] font-[var(--font-display)]">
+                    Keep stakeholders aligned between votes.
+                  </h2>
+                  <p className="mt-4 text-sm text-[#6a5f55]">
+                    Share progress, publish milestones, and flag blockers so
+                    members can follow each initiative in real time.
+                  </p>
+                  <div className="mt-6 flex flex-wrap gap-3 text-xs uppercase tracking-[0.2em] text-[#7b6f65]">
+                    <span className="rounded-full border border-[#d6c7b7] px-3 py-2">
+                      Weekly brief
+                    </span>
+                    <span className="rounded-full border border-[#d6c7b7] px-3 py-2">
+                      Milestone alerts
+                    </span>
+                    <span className="rounded-full border border-[#d6c7b7] px-3 py-2">
+                      Treasury notes
+                    </span>
+                  </div>
+                </div>
+                <div className="grid gap-4">
+                  {[
+                    {
+                      title: "Q4 grants review published",
+                      detail: "7 proposals moved to voting",
+                      time: "6 hours ago",
+                    },
+                    {
+                      title: "Treasury topped up by partner fund",
+                      detail: "Funding runway extended to 16 months",
+                      time: "Yesterday",
+                    },
+                    {
+                      title: "Community studio residency kickoff",
+                      detail: "First cohort orientation complete",
+                      time: "2 days ago",
+                    },
+                  ].map((item) => (
+                    <div
+                      key={item.title}
+                      className="rounded-2xl border border-[#e6d9c8] bg-white px-5 py-4 text-sm text-[#6a5f55]"
+                    >
+                      <p className="text-sm font-semibold text-[#1f1b16]">
+                        {item.title}
+                      </p>
+                      <p className="mt-2 text-xs uppercase tracking-[0.2em] text-[#8a7d71]">
+                        {item.detail}
+                      </p>
+                      <p className="mt-2 text-xs text-[#6a5f55]">
+                        {item.time}
+                      </p>
+                    </div>
+                  ))}
+                  <button className="rounded-full border border-[#1f1b16] px-4 py-2 text-sm font-medium transition hover:bg-[#1f1b16] hover:text-[#f7f2e9]">
+                    View all updates
+                  </button>
+                </div>
+              </div>
+            </div>
+          </section>
         </main>
 
         <footer className="relative z-10 border-t border-[#e6d9c8]">
