@@ -733,6 +733,98 @@ export default function Home() {
             </div>
           </section>
 
+          <section className="mx-auto w-full max-w-6xl px-6 pb-24">
+            <div className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr]">
+              <div className="rounded-3xl border border-[#e6d9c8] bg-white/80 p-8 shadow-[0_20px_60px_rgba(31,27,22,0.08)]">
+                <p className="text-xs uppercase tracking-[0.3em] text-[#8a7d71]">
+                  Governance policy
+                </p>
+                <h3 className="mt-3 text-2xl font-semibold text-[#1f1b16] font-[var(--font-display)]">
+                  Clear rules keep funding fair.
+                </h3>
+                <p className="mt-3 text-sm text-[#6a5f55]">
+                  Proposal windows, quorum targets, and treasury safeguards are
+                  visible to every member before they vote.
+                </p>
+                <div className="mt-6 grid gap-4">
+                  <div className="rounded-2xl border border-[#f0e6d8] bg-[#fdfaf5] p-4">
+                    <p className="text-xs uppercase tracking-[0.2em] text-[#8a7d71]">
+                      Proposal windows
+                    </p>
+                    <p className="mt-3 text-sm text-[#6a5f55]">
+                      Voting starts no earlier than the next block and runs for
+                      up to 2,400 blocks.
+                    </p>
+                  </div>
+                  <div className="rounded-2xl border border-[#f0e6d8] bg-[#fdfaf5] p-4">
+                    <p className="text-xs uppercase tracking-[0.2em] text-[#8a7d71]">
+                      Quorum requirements
+                    </p>
+                    <p className="mt-3 text-sm text-[#6a5f55]">
+                      At least 4,200 weighted votes needed before execution.
+                    </p>
+                  </div>
+                  <div className="rounded-2xl border border-[#f0e6d8] bg-[#fdfaf5] p-4">
+                    <p className="text-xs uppercase tracking-[0.2em] text-[#8a7d71]">
+                      Treasury safeguards
+                    </p>
+                    <p className="mt-3 text-sm text-[#6a5f55]">
+                      Withdrawals require a passed proposal and multi-sig
+                      confirmation.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="rounded-3xl border border-[#1f1b16] bg-[#1f1b16] p-8 text-[#f7f2e9]">
+                <p className="text-xs uppercase tracking-[0.3em] text-[#d9cbbb]">
+                  Status mapping
+                </p>
+                <h3 className="mt-3 text-2xl font-semibold font-[var(--font-display)]">
+                  Proposal codes made human.
+                </h3>
+                <div className="mt-6 grid gap-3 text-xs uppercase tracking-[0.2em] text-[#d9cbbb]">
+                  <div className="flex items-center justify-between rounded-2xl border border-[#2b2621] bg-[#241f1a] px-4 py-3">
+                    <span>Pending</span>
+                    <span className="rounded-full bg-[#f7d8a3] px-3 py-1 text-[10px] font-semibold text-[#5f3c06]">
+                      Review
+                    </span>
+                  </div>
+                  <div className="flex items-center justify-between rounded-2xl border border-[#2b2621] bg-[#241f1a] px-4 py-3">
+                    <span>Active</span>
+                    <span className="rounded-full bg-[#f7f2e9] px-3 py-1 text-[10px] font-semibold text-[#1f1b16]">
+                      Voting
+                    </span>
+                  </div>
+                  <div className="flex items-center justify-between rounded-2xl border border-[#2b2621] bg-[#241f1a] px-4 py-3">
+                    <span>Passed</span>
+                    <span className="rounded-full bg-[#d6f2d9] px-3 py-1 text-[10px] font-semibold text-[#246337]">
+                      Execute
+                    </span>
+                  </div>
+                  <div className="flex items-center justify-between rounded-2xl border border-[#2b2621] bg-[#241f1a] px-4 py-3">
+                    <span>Failed</span>
+                    <span className="rounded-full bg-[#f7c7bf] px-3 py-1 text-[10px] font-semibold text-[#7f1e18]">
+                      Closed
+                    </span>
+                  </div>
+                  <div className="flex items-center justify-between rounded-2xl border border-[#2b2621] bg-[#241f1a] px-4 py-3">
+                    <span>Executed</span>
+                    <span className="rounded-full bg-[#e3ddfb] px-3 py-1 text-[10px] font-semibold text-[#3f2f7a]">
+                      Complete
+                    </span>
+                  </div>
+                  <div className="flex items-center justify-between rounded-2xl border border-[#2b2621] bg-[#241f1a] px-4 py-3">
+                    <span>Canceled</span>
+                    <span className="rounded-full bg-[#ede2d4] px-3 py-1 text-[10px] font-semibold text-[#6a5f55]">
+                      Archived
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
           <section
             id="treasury"
             className="mx-auto w-full max-w-6xl px-6 pb-24"
