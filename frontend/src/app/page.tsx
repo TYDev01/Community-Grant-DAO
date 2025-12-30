@@ -47,6 +47,24 @@ export default function Home() {
       no: 12,
       ends: "Ready to execute",
     },
+    {
+      title: "Neighborhood Civic Labs",
+      status: "Failed",
+      budget: "$58k",
+      lead: "Lead: Omar L.",
+      yes: 38,
+      no: 52,
+      ends: "Closed 1d ago",
+    },
+    {
+      title: "Open Climate Data Commons",
+      status: "Executed",
+      budget: "$140k",
+      lead: "Lead: Sarai M.",
+      yes: 81,
+      no: 9,
+      ends: "Executed 3d ago",
+    },
   ];
   return (
     <div className="min-h-screen bg-[#f7f2e9] text-[#1f1b16] font-sans">
