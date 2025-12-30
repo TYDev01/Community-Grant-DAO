@@ -415,6 +415,14 @@ export default function Home() {
                       </div>
                     </label>
                   ))}
+                  <div className="grid gap-2 text-sm text-[#6a5f55]">
+                    <span className="text-xs uppercase tracking-[0.2em] text-[#8a7d71]">
+                      Proposal summary
+                    </span>
+                    <div className="rounded-2xl border border-[#e6d9c8] bg-[#fdfaf5] px-4 py-4 text-sm text-[#a29589]">
+                      Outline scope, impact, and requested support.
+                    </div>
+                  </div>
                   <label className="grid gap-2 text-sm text-[#6a5f55]">
                     <span className="text-xs uppercase tracking-[0.2em] text-[#8a7d71]">
                       Category + Milestones
@@ -463,6 +471,30 @@ export default function Home() {
                   <span className="text-xs uppercase tracking-[0.2em] text-[#8a7d71]">
                     Transaction: ready
                   </span>
+                </div>
+                <div className="mt-6 grid gap-3 rounded-2xl border border-[#f0e6d8] bg-[#fdfaf5] p-4 text-xs text-[#6a5f55]">
+                  <div className="flex items-center justify-between">
+                    <span className="uppercase tracking-[0.2em] text-[#8a7d71]">
+                      Checklist
+                    </span>
+                    <span>2/4 complete</span>
+                  </div>
+                  {[
+                    "Treasury balance verified",
+                    "Milestone schedule added",
+                    "Governance category selected",
+                    "Voting window set",
+                  ].map((item) => (
+                    <div
+                      key={item}
+                      className="flex items-center justify-between rounded-xl border border-[#e9dfd1] bg-white/80 px-3 py-2"
+                    >
+                      <span>{item}</span>
+                      <span className="text-[10px] uppercase tracking-[0.2em] text-[#8a7d71]">
+                        Ready
+                      </span>
+                    </div>
+                  ))}
                 </div>
               </div>
 
