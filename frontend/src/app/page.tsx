@@ -1491,6 +1491,53 @@ export default function Home() {
               </div>
             </div>
           </section>
+
+          <section className="mx-auto w-full max-w-6xl px-6 pb-24">
+            <div className="rounded-3xl border border-[#1f1b16] bg-[#1f1b16] px-10 py-12 text-[#f7f2e9]">
+              <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr]">
+                <div>
+                  <p className="text-xs uppercase tracking-[0.3em] text-[#d9cbbb]">
+                    Launch governance
+                  </p>
+                  <h2 className="mt-4 text-3xl font-semibold font-[var(--font-display)]">
+                    Move from idea to funded execution in one cycle.
+                  </h2>
+                  <p className="mt-4 text-sm text-[#d9cbbb]">
+                    Connect your wallet, draft a proposal, and run the vote with
+                    transparent rules that keep everyone aligned.
+                  </p>
+                </div>
+                <div className="grid gap-4 rounded-2xl border border-[#2b2621] bg-[#241f1a] p-6 text-sm text-[#d9cbbb]">
+                  <div className="flex items-center justify-between">
+                    <span>Setup time</span>
+                    <span className="text-base font-semibold text-[#f7f2e9]">
+                      5 minutes
+                    </span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span>Contracts deployed</span>
+                    <span className="text-base font-semibold text-[#f7f2e9]">
+                      2
+                    </span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span>Members onboarded</span>
+                    <span className="text-base font-semibold text-[#f7f2e9]">
+                      1,248
+                    </span>
+                  </div>
+                  <div className="mt-4 flex flex-wrap gap-3">
+                    <button className="rounded-full bg-[#f7f2e9] px-6 py-3 text-sm font-semibold text-[#1f1b16] transition hover:bg-white">
+                      Launch app
+                    </button>
+                    <button className="rounded-full border border-[#f7f2e9] px-6 py-3 text-sm font-semibold text-[#f7f2e9] transition hover:bg-[#f7f2e9] hover:text-[#1f1b16]">
+                      Read docs
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
         </main>
 
         <footer className="relative z-10 border-t border-[#e6d9c8]">
