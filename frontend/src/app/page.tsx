@@ -259,6 +259,41 @@ export default function Home() {
             </div>
           </section>
 
+          <section className="mx-auto w-full max-w-6xl px-6 pb-20">
+            <div className="grid gap-6 md:grid-cols-3">
+              {[
+                {
+                  title: "Participation rate",
+                  value: "68%",
+                  detail: "Last 30 days",
+                },
+                {
+                  title: "Avg. vote duration",
+                  value: "3.6 days",
+                  detail: "Window size",
+                },
+                {
+                  title: "Funds allocated",
+                  value: "$1.2M",
+                  detail: "This quarter",
+                },
+              ].map((item) => (
+                <div
+                  key={item.title}
+                  className="rounded-3xl border border-[#e6d9c8] bg-white/80 p-6 text-[#6a5f55] shadow-[0_18px_45px_rgba(31,27,22,0.06)]"
+                >
+                  <p className="text-xs uppercase tracking-[0.3em] text-[#8a7d71]">
+                    {item.title}
+                  </p>
+                  <p className="mt-3 text-3xl font-semibold text-[#1f1b16] font-[var(--font-display)]">
+                    {item.value}
+                  </p>
+                  <p className="mt-2 text-sm">{item.detail}</p>
+                </div>
+              ))}
+            </div>
+          </section>
+
           <section
             id="flow"
             className="mx-auto w-full max-w-6xl px-6 pb-20"
