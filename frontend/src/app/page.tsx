@@ -1554,8 +1554,18 @@ export default function Home() {
         </main>
 
         <footer className="relative z-10 border-t border-[#e6d9c8]">
-          <div className="mx-auto flex w-full max-w-6xl flex-wrap items-center justify-between gap-4 px-6 py-8 text-sm text-[#6a5f55]">
-            <p>Community DAO. Built for shared ownership.</p>
+          <div className="mx-auto flex w-full max-w-6xl flex-wrap items-center justify-between gap-6 px-6 py-8 text-sm text-[#6a5f55]">
+            <div className="space-y-2">
+              <p>Community DAO. Built for shared ownership.</p>
+              <div className="flex flex-wrap gap-2 text-[10px] uppercase tracking-[0.2em] text-[#8a7d71]">
+                <span className="rounded-full border border-[#d6c7b7] px-3 py-1">
+                  Network: mainnet
+                </span>
+                <span className="rounded-full border border-[#d6c7b7] px-3 py-1">
+                  Version 0.9.2
+                </span>
+              </div>
+            </div>
             <div className="flex gap-6 uppercase tracking-[0.2em] text-xs">
               <a className="hover:text-[#1f1b16]" href="#">
                 Status
