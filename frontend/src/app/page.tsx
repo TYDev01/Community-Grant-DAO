@@ -438,21 +438,28 @@ export default function Home() {
                   Draft, vote, and execute in one place.
                 </h2>
               </div>
-              <div className="flex flex-wrap gap-2 text-xs uppercase tracking-[0.2em] text-[#7b6f65]">
+              <div className="flex flex-wrap items-center gap-2 text-xs uppercase tracking-[0.2em] text-[#7b6f65]">
+                <div className="rounded-full border border-[#d6c7b7] px-4 py-2 text-[10px] text-[#a29589]">
+                  Search proposals
+                </div>
                 {[
-                  "All",
-                  "Active",
-                  "Pending",
-                  "Passed",
-                  "Failed",
-                  "Executed",
-                  "Canceled",
+                  { label: "All", active: false },
+                  { label: "Active", active: true },
+                  { label: "Pending", active: false },
+                  { label: "Passed", active: false },
+                  { label: "Failed", active: false },
+                  { label: "Executed", active: false },
+                  { label: "Canceled", active: false },
                 ].map((filter) => (
                   <button
-                    key={filter}
-                    className="rounded-full border border-[#d6c7b7] px-3 py-2 transition hover:border-[#1f1b16] hover:text-[#1f1b16]"
+                    key={filter.label}
+                    className={`rounded-full px-3 py-2 transition ${
+                      filter.active
+                        ? "bg-[#1f1b16] text-[#f7f2e9]"
+                        : "border border-[#d6c7b7] hover:border-[#1f1b16] hover:text-[#1f1b16]"
+                    }`}
                   >
-                    {filter}
+                    {filter.label}
                   </button>
                 ))}
               </div>
@@ -1425,6 +1432,115 @@ export default function Home() {
                   <button className="rounded-full border border-[#1f1b16] px-4 py-2 text-sm font-medium transition hover:bg-[#1f1b16] hover:text-[#f7f2e9]">
                     View all updates
                   </button>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section className="mx-auto w-full max-w-6xl px-6 pb-24">
+            <div className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr]">
+              <div className="rounded-3xl border border-[#1f1b16] bg-[#1f1b16] p-8 text-[#f7f2e9]">
+                <p className="text-xs uppercase tracking-[0.3em] text-[#d9cbbb]">
+                  Help desk
+                </p>
+                <h2 className="mt-3 text-3xl font-semibold font-[var(--font-display)]">
+                  Answers for every governance role.
+                </h2>
+                <p className="mt-3 text-sm text-[#d9cbbb]">
+                  Find quick guidance on proposal windows, voting rules, and
+                  treasury releases without leaving the workspace.
+                </p>
+                <div className="mt-6 grid gap-3 text-sm text-[#d9cbbb]">
+                  {[
+                    "How to open a proposal window",
+                    "What happens when quorum is missed",
+                    "When the treasury can execute payouts",
+                    "How to cancel or revise a draft",
+                  ].map((item) => (
+                    <div
+                      key={item}
+                      className="flex items-center justify-between rounded-2xl border border-[#2b2621] bg-[#241f1a] px-4 py-3"
+                    >
+                      <span>{item}</span>
+                      <span className="rounded-full bg-[#f7f2e9] px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-[#1f1b16]">
+                        Read
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="rounded-3xl border border-[#e6d9c8] bg-white/80 p-8 shadow-[0_20px_60px_rgba(31,27,22,0.08)]">
+                <p className="text-xs uppercase tracking-[0.3em] text-[#8a7d71]">
+                  Governance digest
+                </p>
+                <h3 className="mt-3 text-2xl font-semibold text-[#1f1b16] font-[var(--font-display)]">
+                  Weekly updates for members.
+                </h3>
+                <p className="mt-3 text-sm text-[#6a5f55]">
+                  Get proposal highlights, treasury movements, and voting
+                  reminders in one email.
+                </p>
+                <div className="mt-6 grid gap-3">
+                  <div className="rounded-2xl border border-[#e6d9c8] bg-[#fdfaf5] px-4 py-3 text-sm text-[#a29589]">
+                    your@email.com
+                  </div>
+                  <button className="rounded-full bg-[#1f1b16] px-6 py-3 text-sm font-medium text-[#f7f2e9] transition hover:bg-[#3a332c]">
+                    Subscribe
+                  </button>
+                  <p className="text-xs text-[#8a7d71]">
+                    1,420 members already receive the digest.
+                  </p>
+                </div>
+                <div className="mt-6 rounded-2xl border border-[#f0e6d8] bg-[#fdfaf5] p-4 text-xs uppercase tracking-[0.2em] text-[#8a7d71]">
+                  Next release: Monday 9:00 AM UTC
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section className="mx-auto w-full max-w-6xl px-6 pb-24">
+            <div className="rounded-3xl border border-[#1f1b16] bg-[#1f1b16] px-10 py-12 text-[#f7f2e9]">
+              <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr]">
+                <div>
+                  <p className="text-xs uppercase tracking-[0.3em] text-[#d9cbbb]">
+                    Launch governance
+                  </p>
+                  <h2 className="mt-4 text-3xl font-semibold font-[var(--font-display)]">
+                    Move from idea to funded execution in one cycle.
+                  </h2>
+                  <p className="mt-4 text-sm text-[#d9cbbb]">
+                    Connect your wallet, draft a proposal, and run the vote with
+                    transparent rules that keep everyone aligned.
+                  </p>
+                </div>
+                <div className="grid gap-4 rounded-2xl border border-[#2b2621] bg-[#241f1a] p-6 text-sm text-[#d9cbbb]">
+                  <div className="flex items-center justify-between">
+                    <span>Setup time</span>
+                    <span className="text-base font-semibold text-[#f7f2e9]">
+                      5 minutes
+                    </span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span>Contracts deployed</span>
+                    <span className="text-base font-semibold text-[#f7f2e9]">
+                      2
+                    </span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span>Members onboarded</span>
+                    <span className="text-base font-semibold text-[#f7f2e9]">
+                      1,248
+                    </span>
+                  </div>
+                  <div className="mt-4 flex flex-wrap gap-3">
+                    <button className="rounded-full bg-[#f7f2e9] px-6 py-3 text-sm font-semibold text-[#1f1b16] transition hover:bg-white">
+                      Launch app
+                    </button>
+                    <button className="rounded-full border border-[#f7f2e9] px-6 py-3 text-sm font-semibold text-[#f7f2e9] transition hover:bg-[#f7f2e9] hover:text-[#1f1b16]">
+                      Read docs
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
